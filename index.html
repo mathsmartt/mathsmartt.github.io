@@ -3,33 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Quizora — AI Quizzes, Year 1–10</title>
+<title>GetSmartt — Smart AI Quizzes, Year 1–10</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  /* ---------- Tokens ---------- */
   :root{
-    --bg:#070914;
-    --bg-2:#0c0f22;
-    --panel:rgba(255,255,255,0.045);
-    --panel-strong:rgba(255,255,255,0.08);
-    --border:rgba(255,255,255,0.09);
-    --border-strong:rgba(255,255,255,0.18);
-    --text:#F2F4FF;
-    --text-dim:#9BA3C9;
-    --text-dimmer:#6B7299;
-    --accent-a:#8B5CF6;
-    --accent-a-soft:#8B5CF633;
-    --accent-b:#22D3EE;
-    --accent-b-soft:#22D3EE33;
-    --gold:#FFD166;
-    --gold-soft:#FFD16633;
-    --success:#34D399;
-    --danger:#FF5C7A;
-    --radius-lg:20px;
-    --radius-md:14px;
-    --radius-sm:9px;
+    --bg:#070914; --bg-2:#0c0f22;
+    --panel:rgba(255,255,255,0.045); --panel-strong:rgba(255,255,255,0.08);
+    --border:rgba(255,255,255,0.09); --border-strong:rgba(255,255,255,0.18);
+    --text:#F2F4FF; --text-dim:#9BA3C9; --text-dimmer:#6B7299;
+    --accent-a:#8B5CF6; --accent-a-soft:#8B5CF633;
+    --accent-b:#22D3EE; --accent-b-soft:#22D3EE33;
+    --gold:#FFD166; --gold-soft:#FFD16633;
+    --success:#34D399; --danger:#FF5C7A;
+    --radius-lg:20px; --radius-md:14px; --radius-sm:9px;
     --font-display:'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
     --font-body:'Inter', ui-sans-serif, system-ui, sans-serif;
   }
@@ -41,31 +29,16 @@
 
   *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   html,body{ height:100%; }
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--font-body);
-    overflow-x:hidden;
-    min-height:100vh;
-    position:relative;
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
-  }
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:var(--font-body); overflow-x:hidden; min-height:100vh; position:relative; }
+  @media (prefers-reduced-motion: reduce){ *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; } }
 
-  /* ---------- Background scene ---------- */
-  .scene{
-    position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;
+  .scene{ position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;
     background:
       radial-gradient(ellipse 60% 40% at 15% 8%, var(--accent-a-soft), transparent 60%),
       radial-gradient(ellipse 50% 35% at 88% 12%, var(--accent-b-soft), transparent 60%),
       radial-gradient(ellipse 70% 50% at 50% 100%, #1a1030 0%, transparent 60%),
-      linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
-  }
-  .scene::before{
-    content:"";
-    position:absolute; inset:-10%;
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%); }
+  .scene::before{ content:""; position:absolute; inset:-10%;
     background-image:
       radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,0.5) 50%, transparent 51%),
       radial-gradient(1.5px 1.5px at 70% 65%, rgba(255,255,255,0.4) 50%, transparent 51%),
@@ -75,11 +48,7 @@
       radial-gradient(1.5px 1.5px at 55% 45%, rgba(255,255,255,0.4) 50%, transparent 51%),
       radial-gradient(1px 1px at 92% 78%, rgba(255,255,255,0.3) 50%, transparent 51%),
       radial-gradient(1.5px 1.5px at 30% 12%, rgba(255,255,255,0.45) 50%, transparent 51%);
-    background-repeat:repeat;
-    background-size:600px 600px;
-    opacity:0.6;
-    animation:drift 90s linear infinite;
-  }
+    background-repeat:repeat; background-size:600px 600px; opacity:0.6; animation:drift 90s linear infinite; }
   @keyframes drift{ from{ transform:translate3d(0,0,0);} to{ transform:translate3d(-300px,-200px,0);} }
   .blob{ position:absolute; border-radius:50%; filter:blur(60px); opacity:0.35; animation:float 16s ease-in-out infinite; }
   .blob.b1{ width:340px; height:340px; background:var(--accent-a); top:-80px; left:-80px; }
@@ -88,183 +57,97 @@
   @keyframes float{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(20px,-30px); } }
 
   .app{ position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; }
-
-  /* ---------- Top bar ---------- */
-  .topbar{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px clamp(16px,4vw,40px);
-    gap:12px;
-  }
+  .topbar{ display:flex; align-items:center; justify-content:space-between; padding:18px clamp(16px,4vw,40px); gap:12px; }
   .brand{ display:flex; align-items:center; gap:10px; cursor:pointer; user-select:none; }
-  .brand-mark{
-    width:38px; height:38px; border-radius:11px;
-    background:linear-gradient(135deg, var(--accent-a), var(--accent-b));
-    display:flex; align-items:center; justify-content:center;
-    font-family:var(--font-display); font-weight:700; font-size:18px; color:#0a0a14;
-    box-shadow:0 0 22px var(--accent-a-soft);
-    flex-shrink:0;
-  }
+  .brand-mark{ width:38px; height:38px; border-radius:11px; background:linear-gradient(135deg, var(--accent-a), var(--accent-b));
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; font-size:18px; color:#0a0a14;
+    box-shadow:0 0 22px var(--accent-a-soft); flex-shrink:0; }
   .brand-name{ font-family:var(--font-display); font-weight:700; font-size:20px; letter-spacing:0.2px; }
   .brand-name span{ color:var(--accent-b); }
 
   .hud{ display:none; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
   .hud.visible{ display:flex; }
-  .coin-pill, .account-pill{
-    display:flex; align-items:center; gap:7px;
-    background:var(--panel); border:1px solid var(--border);
-    padding:8px 14px 8px 10px; border-radius:100px;
-    font-family:var(--font-display); font-weight:600; font-size:15px;
-    backdrop-filter:blur(10px);
-    transition:transform .15s ease;
-  }
+  .coin-pill, .account-pill{ display:flex; align-items:center; gap:7px; background:var(--panel); border:1px solid var(--border);
+    padding:8px 14px 8px 10px; border-radius:100px; font-family:var(--font-display); font-weight:600; font-size:15px; backdrop-filter:blur(10px); transition:transform .15s ease; }
   .coin-pill.bump{ animation:coinbump .4s ease; }
   @keyframes coinbump{ 0%{transform:scale(1);} 35%{transform:scale(1.18);} 100%{transform:scale(1);} }
   .coin-icon{ width:22px; height:22px; flex-shrink:0; }
   .account-pill{ font-size:13.5px; padding:7px 8px 7px 14px; gap:10px; }
-  .account-pill .avatar-dot{ width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,var(--accent-a),var(--accent-b)); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#0a0a14; flex-shrink:0; }
+  .account-pill .avatar-dot{ width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#0a0a14; flex-shrink:0; }
   .logout-btn{ background:none; border:none; color:var(--text-dimmer); cursor:pointer; font-size:15px; padding:4px; line-height:1; border-radius:50%; transition:color .15s ease, background .15s ease; }
   .logout-btn:hover{ color:var(--danger); background:rgba(255,92,122,0.12); }
-  .icon-btn{
-    display:flex; align-items:center; gap:6px;
-    background:var(--panel); border:1px solid var(--border); color:var(--text);
-    padding:9px 15px; border-radius:100px; cursor:pointer;
-    font-family:var(--font-body); font-weight:600; font-size:14px;
-    transition:border-color .15s ease, transform .1s ease, background .15s ease;
-  }
+  .icon-btn{ display:flex; align-items:center; gap:6px; background:var(--panel); border:1px solid var(--border); color:var(--text);
+    padding:9px 15px; border-radius:100px; cursor:pointer; font-family:var(--font-body); font-weight:600; font-size:14px; transition:border-color .15s ease, transform .1s ease, background .15s ease; }
   .icon-btn:hover{ border-color:var(--border-strong); background:var(--panel-strong); }
   .icon-btn:active{ transform:scale(0.96); }
 
   main{ flex:1; padding:8px clamp(16px,4vw,40px) 60px; }
   .wrap{ max-width:1180px; margin:0 auto; }
-
-  /* ---------- Screens ---------- */
   .screen{ display:none; }
   .screen.active{ display:block; animation:fadein .35s ease; }
   @keyframes fadein{ from{ opacity:0; transform:translateY(8px);} to{ opacity:1; transform:translateY(0);} }
 
-  /* ---------- Auth ---------- */
   .auth-wrap{ min-height:78vh; display:flex; align-items:center; justify-content:center; padding:20px 0; }
-  .auth-card{
-    width:100%; max-width:400px;
-    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius-lg);
-    padding:clamp(26px,5vw,38px); backdrop-filter:blur(14px);
-  }
+  .auth-card{ width:100%; max-width:400px; background:var(--panel); border:1px solid var(--border); border-radius:var(--radius-lg);
+    padding:clamp(26px,5vw,38px); backdrop-filter:blur(14px); }
   .auth-card .brand{ justify-content:center; margin-bottom:22px; cursor:default; }
   .auth-tabs{ display:flex; background:var(--panel-strong); border-radius:100px; padding:4px; margin-bottom:22px; }
   .auth-tab{ flex:1; text-align:center; padding:9px; border-radius:100px; cursor:pointer; font-weight:600; font-size:13.5px; color:var(--text-dim); transition:all .15s ease; user-select:none; }
   .auth-tab.active{ background:linear-gradient(135deg,var(--accent-a),var(--accent-b)); color:#0a0a14; }
   .field-label{ font-size:12.5px; font-weight:600; color:var(--text-dim); margin:14px 0 6px; display:block; }
-  .field-input{
-    width:100%; background:var(--panel-strong); border:1.5px solid var(--border); border-radius:var(--radius-sm);
-    padding:12px 14px; color:var(--text); font-family:var(--font-body); font-size:14.5px; outline:none;
-    transition:border-color .15s ease;
-  }
+  .field-input{ width:100%; background:var(--panel-strong); border:1.5px solid var(--border); border-radius:var(--radius-sm);
+    padding:12px 14px; color:var(--text); font-family:var(--font-body); font-size:14.5px; outline:none; transition:border-color .15s ease; }
   .field-input:focus{ border-color:var(--accent-a); }
   .auth-error{ color:var(--danger); font-size:13px; margin-top:12px; min-height:16px; }
   .auth-submit{ width:100%; margin-top:20px; padding:13px; font-size:15px; }
   .auth-note{ text-align:center; color:var(--text-dimmer); font-size:11.5px; margin-top:18px; line-height:1.5; }
 
-  /* ---------- Hero ---------- */
   .hero{ padding:34px 0 26px; }
-  .hero h1{
-    font-family:var(--font-display); font-weight:700;
-    font-size:clamp(30px,5vw,46px); line-height:1.05; margin:0 0 10px;
-    letter-spacing:-0.5px;
-  }
+  .hero h1{ font-family:var(--font-display); font-weight:700; font-size:clamp(30px,5vw,46px); line-height:1.05; margin:0 0 10px; letter-spacing:-0.5px; }
   .hero p{ color:var(--text-dim); font-size:16px; max-width:520px; margin:0; line-height:1.5; }
 
-  /* ---------- Year selector ---------- */
-  .section-label{
-    font-family:var(--font-body); font-weight:700; font-size:13px; color:var(--text-dim);
-    margin:26px 0 12px;
-  }
+  .section-label{ font-family:var(--font-body); font-weight:700; font-size:13px; color:var(--text-dim); margin:26px 0 12px; }
   .year-row{ display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; scrollbar-width:thin; }
   .year-row::-webkit-scrollbar{ height:6px; }
   .year-row::-webkit-scrollbar-thumb{ background:var(--border-strong); border-radius:10px; }
-  .year-chip{
-    flex-shrink:0; cursor:pointer; user-select:none;
-    padding:10px 18px; border-radius:100px;
-    background:var(--panel); border:1px solid var(--border);
-    font-family:var(--font-display); font-weight:600; font-size:14px; color:var(--text-dim);
-    transition:all .15s ease;
-    white-space:nowrap;
-  }
+  .year-chip{ flex-shrink:0; cursor:pointer; user-select:none; padding:10px 18px; border-radius:100px; background:var(--panel); border:1px solid var(--border);
+    font-family:var(--font-display); font-weight:600; font-size:14px; color:var(--text-dim); transition:all .15s ease; white-space:nowrap; }
   .year-chip:hover{ border-color:var(--border-strong); color:var(--text); }
-  .year-chip.active{
-    background:linear-gradient(135deg, var(--accent-a), var(--accent-b));
-    color:#0a0a14; border-color:transparent;
-    box-shadow:0 4px 18px var(--accent-a-soft);
-  }
+  .year-chip.active{ background:linear-gradient(135deg, var(--accent-a), var(--accent-b)); color:#0a0a14; border-color:transparent; box-shadow:0 4px 18px var(--accent-a-soft); }
   .age-hint{ color:var(--text-dimmer); font-size:13px; margin-top:8px; }
 
-  /* ---------- Search + categories ---------- */
   .toolbar{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:22px; }
-  .search-box{
-    flex:1; min-width:220px;
-    display:flex; align-items:center; gap:9px;
-    background:var(--panel); border:1px solid var(--border); border-radius:100px;
-    padding:11px 16px;
-  }
-  .search-box input{
-    flex:1; background:none; border:none; outline:none; color:var(--text);
-    font-family:var(--font-body); font-size:14px;
-  }
+  .search-box{ flex:1; min-width:220px; display:flex; align-items:center; gap:9px; background:var(--panel); border:1px solid var(--border); border-radius:100px; padding:11px 16px; }
+  .search-box input{ flex:1; background:none; border:none; outline:none; color:var(--text); font-family:var(--font-body); font-size:14px; }
   .search-box input::placeholder{ color:var(--text-dimmer); }
   .search-box svg{ flex-shrink:0; opacity:0.5; }
 
   .cat-row{ display:flex; gap:8px; overflow-x:auto; margin-top:14px; padding-bottom:6px; }
   .cat-row::-webkit-scrollbar{ height:6px; }
   .cat-row::-webkit-scrollbar-thumb{ background:var(--border-strong); border-radius:10px; }
-  .cat-chip{
-    flex-shrink:0; cursor:pointer; user-select:none; white-space:nowrap;
-    display:flex; align-items:center; gap:7px;
-    padding:9px 15px; border-radius:100px;
-    background:var(--panel); border:1px solid var(--border);
-    font-size:13px; font-weight:600; color:var(--text-dim);
-    transition:all .15s ease;
-  }
+  .cat-chip{ flex-shrink:0; cursor:pointer; user-select:none; white-space:nowrap; display:flex; align-items:center; gap:7px; padding:9px 15px; border-radius:100px;
+    background:var(--panel); border:1px solid var(--border); font-size:13px; font-weight:600; color:var(--text-dim); transition:all .15s ease; }
   .cat-chip:hover{ color:var(--text); border-color:var(--border-strong); }
   .cat-chip.active{ background:var(--panel-strong); border-color:var(--cat-color, var(--accent-a)); color:var(--text); }
   .cat-dot{ width:8px; height:8px; border-radius:50%; background:var(--cat-color, var(--accent-a)); }
 
-  /* ---------- Subject grid ---------- */
-  .subject-grid{
-    display:grid; grid-template-columns:repeat(auto-fill, minmax(168px,1fr));
-    gap:12px; margin-top:20px;
-  }
-  .subject-tile{
-    cursor:pointer; text-align:left; border:none;
-    background:var(--panel); border:1px solid var(--border);
-    border-radius:var(--radius-md); padding:16px 14px;
-    color:var(--text); font-family:var(--font-body);
-    display:flex; flex-direction:column; gap:14px;
-    position:relative; overflow:hidden;
-    transition:transform .15s ease, border-color .15s ease, background .15s ease;
-  }
-  .subject-tile::before{
-    content:""; position:absolute; top:0; left:0; right:0; height:3px;
-    background:var(--cat-color, var(--accent-a));
-    opacity:0.9;
-  }
+  .subject-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(168px,1fr)); gap:12px; margin-top:20px; }
+  .subject-tile{ cursor:pointer; text-align:left; border:none; background:var(--panel); border:1px solid var(--border); border-radius:var(--radius-md);
+    padding:16px 14px; color:var(--text); font-family:var(--font-body); display:flex; flex-direction:column; gap:14px; position:relative; overflow:hidden;
+    transition:transform .15s ease, border-color .15s ease, background .15s ease; }
+  .subject-tile::before{ content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--cat-color, var(--accent-a)); opacity:0.9; }
   .subject-tile:hover{ transform:translateY(-3px); border-color:var(--border-strong); background:var(--panel-strong); }
   .subject-tile:active{ transform:translateY(-1px) scale(0.98); }
-  .subject-icon{
-    width:34px; height:34px; border-radius:10px;
-    display:flex; align-items:center; justify-content:center; font-size:17px;
-    background:color-mix(in srgb, var(--cat-color, var(--accent-a)) 20%, transparent);
-  }
+  .subject-icon{ width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:17px;
+    background:color-mix(in srgb, var(--cat-color, var(--accent-a)) 20%, transparent); }
   .subject-name{ font-weight:600; font-size:14.5px; line-height:1.3; }
   .subject-cat{ font-size:11.5px; color:var(--text-dimmer); margin-top:-8px; }
   .empty-state{ text-align:center; padding:60px 20px; color:var(--text-dim); }
   .empty-state h3{ font-family:var(--font-display); color:var(--text); margin-bottom:6px; }
 
-  /* ---------- Loading ---------- */
   .loading-screen{ display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:60vh; text-align:center; gap:22px; }
-  .spinner{
-    width:64px; height:64px; border-radius:50%;
-    border:4px solid var(--panel-strong); border-top-color:var(--accent-a); border-right-color:var(--accent-b);
-    animation:spin 0.9s linear infinite;
-  }
+  .spinner{ width:64px; height:64px; border-radius:50%; border:4px solid var(--panel-strong); border-top-color:var(--accent-a); border-right-color:var(--accent-b); animation:spin 0.9s linear infinite; }
   @keyframes spin{ to{ transform:rotate(360deg); } }
   .loading-screen h3{ font-family:var(--font-display); font-size:20px; margin:0; }
   .loading-screen p{ color:var(--text-dim); font-size:14px; max-width:320px; margin:0; }
@@ -276,13 +159,13 @@
   .error-screen h3{ font-family:var(--font-display); font-size:20px; margin:0; }
   .error-screen p{ color:var(--text-dim); max-width:360px; margin:0; font-size:14px; line-height:1.5; }
 
-  /* ---------- Quiz ---------- */
   .quiz-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
   .quiz-meta{ display:flex; align-items:center; gap:10px; }
   .quiz-meta .q-icon{ width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:17px; background:var(--panel-strong); flex-shrink:0; }
   .quiz-meta h2{ font-family:var(--font-display); font-size:17px; margin:0; }
   .quiz-meta .tag{ font-size:12px; color:var(--text-dim); }
-  .quit-btn{ background:none; border:1px solid var(--border); color:var(--text-dim); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; transition:all .15s ease; flex-shrink:0; }
+  .quit-btn{ background:none; border:1px solid var(--border); color:var(--text-dim); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:16px;
+    display:flex; align-items:center; justify-content:center; transition:all .15s ease; flex-shrink:0; }
   .quit-btn:hover{ border-color:var(--danger); color:var(--danger); }
 
   .progress-row{ display:flex; align-items:center; gap:10px; margin-bottom:6px; }
@@ -294,36 +177,24 @@
   .timer-fill{ height:100%; background:linear-gradient(90deg, var(--success), var(--gold)); width:100%; transform-origin:left; }
   .timer-fill.warn{ background:linear-gradient(90deg, var(--gold), var(--danger)); }
 
-  .question-card{
-    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius-lg);
-    padding:clamp(22px,4vw,38px); text-align:center; margin-bottom:22px;
-    min-height:110px; display:flex; align-items:center; justify-content:center;
-  }
+  .question-card{ background:var(--panel); border:1px solid var(--border); border-radius:var(--radius-lg); padding:clamp(22px,4vw,38px);
+    text-align:center; margin-bottom:22px; min-height:110px; display:flex; align-items:center; justify-content:center; }
   .question-card h3{ font-family:var(--font-display); font-weight:600; font-size:clamp(19px,2.6vw,26px); line-height:1.35; margin:0; }
 
   .answers-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   @media (max-width:560px){ .answers-grid{ grid-template-columns:1fr; } }
-  .answer-btn{
-    display:flex; align-items:center; gap:12px; text-align:left;
-    padding:17px 18px; border-radius:var(--radius-md); cursor:pointer;
-    font-family:var(--font-body); font-weight:600; font-size:15px; color:var(--text);
-    border:1.5px solid var(--border); background:var(--panel);
-    transition:transform .12s ease, border-color .15s ease, background .15s ease;
-    position:relative;
-  }
+  .answer-btn{ display:flex; align-items:center; gap:12px; text-align:left; padding:17px 18px; border-radius:var(--radius-md); cursor:pointer;
+    font-family:var(--font-body); font-weight:600; font-size:15px; color:var(--text); border:1.5px solid var(--border); background:var(--panel);
+    transition:transform .12s ease, border-color .15s ease, background .15s ease; position:relative; }
   .answer-btn:hover:not(:disabled){ transform:translateY(-2px); border-color:var(--border-strong); background:var(--panel-strong); }
   .answer-btn:active:not(:disabled){ transform:translateY(0) scale(0.98); }
   .answer-btn:disabled{ cursor:default; }
-  .answer-letter{
-    width:28px; height:28px; border-radius:8px; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center;
-    font-family:var(--font-display); font-size:13px; font-weight:700;
-    background:var(--panel-strong); color:var(--text-dim);
-  }
+  .answer-letter{ width:28px; height:28px; border-radius:8px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-size:13px; font-weight:700; background:var(--panel-strong); color:var(--text-dim); }
   .answer-btn.opt-0 .answer-letter{ background:var(--accent-a-soft); color:var(--accent-a); }
   .answer-btn.opt-1 .answer-letter{ background:var(--accent-b-soft); color:var(--accent-b); }
   .answer-btn.opt-2 .answer-letter{ background:var(--gold-soft); color:var(--gold); }
-  .answer-btn.opt-3{ } .answer-btn.opt-3 .answer-letter{ background:rgba(255,92,122,0.18); color:#ff8fa3; }
+  .answer-btn.opt-3 .answer-letter{ background:rgba(255,92,122,0.18); color:#ff8fa3; }
   .answer-btn.correct{ border-color:var(--success); background:rgba(52,211,153,0.14); animation:pop .35s ease; }
   .answer-btn.correct .answer-letter{ background:var(--success); color:#06251a; }
   .answer-btn.wrong{ border-color:var(--danger); background:rgba(255,92,122,0.14); animation:shake .4s ease; }
@@ -332,61 +203,37 @@
   @keyframes pop{ 0%{ transform:scale(1);} 40%{ transform:scale(1.035);} 100%{ transform:scale(1);} }
   @keyframes shake{ 0%,100%{ transform:translateX(0);} 25%{ transform:translateX(-6px);} 75%{ transform:translateX(6px);} }
 
-  .float-coin{
-    position:fixed; z-index:50; font-family:var(--font-display); font-weight:700; font-size:20px; color:var(--gold);
-    pointer-events:none; animation:floatup 1s ease forwards;
-  }
+  .float-coin{ position:fixed; z-index:50; font-family:var(--font-display); font-weight:700; font-size:20px; color:var(--gold); pointer-events:none; animation:floatup 1s ease forwards; }
   @keyframes floatup{ 0%{ opacity:0; transform:translateY(0) scale(0.8);} 15%{ opacity:1; transform:translateY(-10px) scale(1);} 100%{ opacity:0; transform:translateY(-70px) scale(1);} }
 
   .quiz-footer{ display:flex; justify-content:center; gap:22px; margin-top:22px; color:var(--text-dim); font-size:13.5px; font-weight:600; }
   .quiz-footer b{ color:var(--text); }
   .streak-flame{ color:var(--gold); }
 
-  /* ---------- Results ---------- */
   .results-screen{ display:flex; flex-direction:column; align-items:center; text-align:center; padding:30px 0 10px; }
-  .score-ring{
-    width:168px; height:168px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center; flex-direction:column;
-    background:conic-gradient(var(--accent-a) calc(var(--pct,0) * 1%), var(--panel-strong) 0);
-    margin-bottom:22px; position:relative;
-  }
+  .score-ring{ width:168px; height:168px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-direction:column;
+    background:conic-gradient(var(--accent-a) calc(var(--pct,0) * 1%), var(--panel-strong) 0); margin-bottom:22px; position:relative; }
   .score-ring::before{ content:""; position:absolute; inset:9px; border-radius:50%; background:var(--bg-2); }
   .score-ring b{ position:relative; font-family:var(--font-display); font-size:34px; z-index:1; }
   .score-ring span{ position:relative; font-size:12.5px; color:var(--text-dim); z-index:1; }
   .results-screen h2{ font-family:var(--font-display); font-size:24px; margin:0 0 6px; }
   .results-screen p.sub{ color:var(--text-dim); margin:0 0 22px; font-size:14.5px; }
-  .coin-earn{
-    display:flex; align-items:center; gap:10px; background:var(--gold-soft);
-    border:1px solid rgba(255,209,102,0.4); color:var(--gold);
-    padding:12px 22px; border-radius:100px; font-family:var(--font-display); font-weight:700; font-size:17px;
-    margin-bottom:28px;
-  }
+  .coin-earn{ display:flex; align-items:center; gap:10px; background:var(--gold-soft); border:1px solid rgba(255,209,102,0.4); color:var(--gold);
+    padding:12px 22px; border-radius:100px; font-family:var(--font-display); font-weight:700; font-size:17px; margin-bottom:28px; }
   .results-actions{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
 
-  /* ---------- Buttons ---------- */
-  .btn{
-    font-family:var(--font-display); font-weight:600; font-size:14.5px; cursor:pointer;
-    border-radius:100px; padding:13px 26px; border:1px solid var(--border);
-    background:var(--panel); color:var(--text); transition:all .15s ease;
-  }
+  .btn{ font-family:var(--font-display); font-weight:600; font-size:14.5px; cursor:pointer; border-radius:100px; padding:13px 26px; border:1px solid var(--border);
+    background:var(--panel); color:var(--text); transition:all .15s ease; }
   .btn:hover{ border-color:var(--border-strong); background:var(--panel-strong); transform:translateY(-1px); }
   .btn:active{ transform:translateY(0) scale(0.97); }
-  .btn.primary{
-    background:linear-gradient(135deg, var(--accent-a), var(--accent-b)); color:#0a0a14; border:none;
-    box-shadow:0 6px 22px var(--accent-a-soft);
-  }
+  .btn.primary{ background:linear-gradient(135deg, var(--accent-a), var(--accent-b)); color:#0a0a14; border:none; box-shadow:0 6px 22px var(--accent-a-soft); }
   .btn.primary:hover{ filter:brightness(1.07); }
-  .btn.full{ width:100%; }
 
-  /* ---------- Shop ---------- */
   .shop-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; flex-wrap:wrap; gap:10px; }
   .shop-header h2{ font-family:var(--font-display); font-size:26px; margin:0; }
   .shop-sub{ color:var(--text-dim); margin:0 0 26px; font-size:14.5px; }
   .theme-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:14px; }
-  .theme-card{
-    border:1px solid var(--border); border-radius:var(--radius-md); padding:18px; background:var(--panel);
-    display:flex; flex-direction:column; gap:12px;
-  }
+  .theme-card{ border:1px solid var(--border); border-radius:var(--radius-md); padding:18px; background:var(--panel); display:flex; flex-direction:column; gap:12px; }
   .theme-swatch{ height:56px; border-radius:10px; }
   .theme-name{ font-family:var(--font-display); font-weight:600; font-size:15px; }
   .theme-desc{ font-size:12.5px; color:var(--text-dim); margin-top:-8px; }
@@ -406,8 +253,8 @@
 <div class="app">
   <div class="topbar">
     <div class="brand" id="logoBtn">
-      <div class="brand-mark">Q</div>
-      <div class="brand-name">Quiz<span>ora</span></div>
+      <div class="brand-mark">G</div>
+      <div class="brand-name">Get<span>Smartt</span></div>
     </div>
     <div class="hud" id="hud">
       <div class="account-pill" id="accountPill">
@@ -416,7 +263,7 @@
         <button class="logout-btn" id="logoutBtn" title="Log out">⏻</button>
       </div>
       <div class="coin-pill" id="coinPill">
-        <svg class="coin-icon" viewBox="0 0 24 24"><defs><linearGradient id="coinGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE29A"/><stop offset="1" stop-color="#FFB84D"/></linearGradient></defs><circle cx="12" cy="12" r="10" fill="url(#coinGrad)" stroke="#B9781E" stroke-width="1"/><text x="12" y="16.5" font-size="11" font-weight="700" text-anchor="middle" fill="#8a5a12" font-family="Space Grotesk, sans-serif">Q</text></svg>
+        <svg class="coin-icon" viewBox="0 0 24 24"><defs><linearGradient id="coinGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE29A"/><stop offset="1" stop-color="#FFB84D"/></linearGradient></defs><circle cx="12" cy="12" r="10" fill="url(#coinGrad)" stroke="#B9781E" stroke-width="1"/><text x="12" y="16.5" font-size="11" font-weight="700" text-anchor="middle" fill="#8a5a12" font-family="Space Grotesk, sans-serif">G</text></svg>
         <span id="coinCount">0</span>
       </div>
       <button class="icon-btn" id="shopBtn">🛍️ Shop</button>
@@ -430,7 +277,7 @@
       <section class="screen active" id="screen-auth">
         <div class="auth-wrap">
           <div class="auth-card">
-            <div class="brand"><div class="brand-mark">Q</div><div class="brand-name">Quiz<span>ora</span></div></div>
+            <div class="brand"><div class="brand-mark">G</div><div class="brand-name">Get<span>Smartt</span></div></div>
             <div class="auth-tabs">
               <div class="auth-tab active" id="tabLogin">Log in</div>
               <div class="auth-tab" id="tabSignup">Sign up</div>
@@ -443,7 +290,7 @@
               <div class="auth-error" id="authError"></div>
               <button type="submit" class="btn primary auth-submit" id="authSubmit">Log in</button>
             </form>
-            <div class="auth-note">Your coins, themes and progress are saved on this device only, inside this browser — there's no server, so accounts don't sync between devices and passwords are for keeping profiles separate, not real security.</div>
+            <div class="auth-note" id="authNote">Your coins, themes and progress are saved on this device only, inside this browser — there's no server, so accounts don't sync between devices and passwords just keep profiles separate rather than provide real security.</div>
           </div>
         </div>
       </section>
@@ -452,7 +299,7 @@
       <section class="screen" id="screen-home">
         <div class="hero">
           <h1>Pick a subject.<br>Beat the clock.<br>Earn coins.</h1>
-          <p>Fresh AI-written questions for Year 1 through Year 10, across 200 subjects. Choose your year, choose your topic, and play.</p>
+          <p>Smart, auto-generated questions for Year 1 through Year 10, across 200 subjects — written instantly by GetSmartt's own built-in question engine. Choose your year, choose your topic, and play.</p>
         </div>
 
         <div class="section-label">YOUR YEAR</div>
@@ -475,7 +322,7 @@
         <div class="loading-screen">
           <div class="spinner"></div>
           <h3 id="loadingTitle">Writing your questions…</h3>
-          <p id="loadingSub">Our AI is building a fresh quiz just for you.</p>
+          <p id="loadingSub">GetSmartt's built-in engine is building a fresh quiz.</p>
           <div class="loading-bar"><span></span></div>
         </div>
       </section>
@@ -483,7 +330,7 @@
       <!-- ERROR -->
       <section class="screen" id="screen-error">
         <div class="error-screen">
-          <h3 id="errorTitle">Couldn't generate that quiz</h3>
+          <h3 id="errorTitle">Could not build that quiz</h3>
           <p id="errorSub">Something went wrong while writing your questions. Let's try again.</p>
           <button class="btn primary" id="errorRetryBtn">Try again</button>
           <button class="btn" id="errorHomeBtn">Back home</button>
@@ -522,7 +369,7 @@
           <h2 id="resultsTitle">Nice work!</h2>
           <p class="sub" id="resultsSub">You're getting the hang of this.</p>
           <div class="coin-earn">
-            <svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD166" stroke="#B9781E" stroke-width="1"/><text x="12" y="16.5" font-size="11" font-weight="700" text-anchor="middle" fill="#8a5a12" font-family="Space Grotesk, sans-serif">Q</text></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD166" stroke="#B9781E" stroke-width="1"/><text x="12" y="16.5" font-size="11" font-weight="700" text-anchor="middle" fill="#8a5a12" font-family="Space Grotesk, sans-serif">G</text></svg>
             <span id="resultsCoins">+0 coins</span>
           </div>
           <div class="results-actions">
@@ -539,7 +386,7 @@
           <h2>Shop</h2>
           <button class="btn" id="shopBackBtn">← Back</button>
         </div>
-        <p class="shop-sub">Spend coins you've earned on new color themes for Quizora.</p>
+        <p class="shop-sub">Spend coins you've earned on new color themes for GetSmartt.</p>
         <div class="theme-grid" id="themeGrid"></div>
       </section>
 
@@ -551,7 +398,7 @@
 (function(){
   "use strict";
 
-  /* ================= SUBJECT DATA ================= */
+  /* ================= CATEGORY + SUBJECT LIST ================= */
   var CATEGORIES = [
     { id:'maths', name:'Maths', icon:'➗', color:'#8B5CF6', subjects:['Number Sense','Addition','Subtraction','Multiplication','Division','Fractions','Decimals','Percentages','Ratio & Proportion','Algebra Basics','Geometry & Shapes','Angles','Symmetry','Measurement','Time & Clocks','Money Maths','Data & Graphs','Probability','Coordinates','Mental Maths'] },
     { id:'science', name:'Science', icon:'🔬', color:'#22D3EE', subjects:['Human Body','Animals','Plants & Growth','Life Cycles','Habitats & Ecosystems','States of Matter','Materials','Forces & Motion','Energy','Electricity','Magnetism','Light & Shadows','Sound','Earth & Rocks','Weather & Climate','The Solar System','Space Exploration','Chemistry Basics','Genetics & Evolution','Famous Scientists'] },
@@ -575,121 +422,460 @@
   ];
 
   var ALL_SUBJECTS = [];
-  CATEGORIES.forEach(function(cat){
-    cat.subjects.forEach(function(name){ ALL_SUBJECTS.push({ name:name, cat:cat }); });
-  });
+  CATEGORIES.forEach(function(cat){ cat.subjects.forEach(function(name){ ALL_SUBJECTS.push({ name:name, cat:cat }); }); });
+
+  /* ================= FACT BANK (knowledge subjects) ================= */
+  var FACTS = {
+    science: {
+      "Human Body": [["Heart","pumps blood around your body"], ["Lungs","take in oxygen when you breathe"], ["Skeleton","made up of around 206 bones in adults"], ["Brain","controls the whole nervous system"]],
+      "Animals": [["Mammal","a warm-blooded animal that feeds its young milk"], ["Reptile","a cold-blooded animal with scaly skin"], ["Amphibian","an animal that lives both in water and on land"], ["Carnivore","an animal that only eats meat"]],
+      "Plants & Growth": [["Photosynthesis","how plants make food using sunlight"], ["Chlorophyll","the green pigment that helps plants absorb light"], ["Pollination","when pollen moves from one flower to another"], ["Germination","when a seed begins to grow into a plant"]],
+      "Life Cycles": [["Metamorphosis","a big change in body shape during an animal's life cycle"], ["Larva","the young form of an insect such as a caterpillar"], ["Pupa","the resting stage between larva and adult insect"], ["Gestation","the time a baby develops inside its mother"]],
+      "Habitats & Ecosystems": [["Habitat","the natural home of a plant or animal"], ["Food Chain","shows what eats what in an ecosystem"], ["Predator","an animal that hunts other animals for food"], ["Producer","a plant that makes its own food from sunlight"]],
+      "States of Matter": [["Solid","a state of matter that keeps its own shape"], ["Liquid","a state of matter that takes the shape of its container"], ["Gas","a state of matter that spreads out to fill a space"], ["Melting","when a solid turns into a liquid by heating"]],
+      "Materials": [["Insulator","a material that does not let heat or electricity pass easily"], ["Conductor","a material that lets heat or electricity pass through it"], ["Transparent","a material you can see clearly through"], ["Opaque","a material that no light can pass through"]],
+      "Forces & Motion": [["Gravity","the force that pulls objects down towards the Earth"], ["Friction","a force that slows things down when surfaces rub together"], ["Air Resistance","a force that pushes against moving objects in the air"], ["Upthrust","a force that pushes objects upward in water"]],
+      "Energy": [["Kinetic Energy","the energy of a moving object"], ["Potential Energy","stored energy an object has because of its position"], ["Renewable Energy","energy from sources that never run out, like the sun or wind"], ["Fossil Fuel","a non-renewable fuel formed from ancient plants and animals"]],
+      "Electricity": [["Circuit","a loop that electricity flows around"], ["Conductor","a material that lets electricity flow through easily, like metal"], ["Insulator","a material that stops electricity flowing, like rubber"], ["Battery","a device that stores energy to power a circuit"]],
+      "Magnetism": [["Magnet","an object that attracts iron and steel"], ["Magnetic Field","the invisible area around a magnet where its force works"], ["Poles","the two ends of a magnet, called north and south"], ["Repel","when two magnetic poles push away from each other"]],
+      "Light & Shadows": [["Shadow","a dark shape made when an object blocks light"], ["Reflection","when light bounces off a surface, like a mirror"], ["Refraction","when light bends as it passes through water or glass"], ["Opaque Object","an object that blocks light completely, making a shadow"]],
+      "Sound": [["Vibration","a fast back-and-forth movement that creates sound"], ["Pitch","how high or low a sound is"], ["Volume","how loud or quiet a sound is"], ["Echo","a sound that bounces back off a surface"]],
+      "Earth & Rocks": [["Igneous Rock","rock formed when melted magma cools and hardens"], ["Sedimentary Rock","rock formed from layers of sand and mud pressed together"], ["Metamorphic Rock","rock changed by heat and pressure underground"], ["Fossil","the preserved remains of an ancient plant or animal"]],
+      "Weather & Climate": [["Climate","the usual weather pattern of a place over a long time"], ["Precipitation","water that falls from clouds, like rain or snow"], ["Evaporation","when liquid water turns into water vapour"], ["Condensation","when water vapour turns back into liquid water"]],
+      "The Solar System": [["Sun","the star at the centre of our solar system"], ["Orbit","the path a planet takes around the sun"], ["Mercury","the closest planet to the sun"], ["Jupiter","the largest planet in the solar system"]],
+      "Space Exploration": [["Astronaut","a person trained to travel and work in space"], ["Satellite","an object that orbits a planet, natural or man-made"], ["Rocket","a vehicle that launches spacecraft into space"], ["NASA","the United States space agency"]],
+      "Chemistry Basics": [["Element","a pure substance made of only one type of atom"], ["Compound","a substance made of two or more elements joined together"], ["Mixture","a combination of substances that are not chemically joined"], ["Atom","the smallest basic building block of matter"]],
+      "Genetics & Evolution": [["Gene","a piece of DNA that carries information about a trait"], ["Inherited Trait","a feature passed from parents to their children"], ["Adaptation","a feature that helps a living thing survive in its habitat"], ["Evolution","how species slowly change over many generations"]],
+      "Famous Scientists": [["Isaac Newton","the scientist known for discovering the laws of gravity"], ["Charles Darwin","the scientist known for the theory of evolution"], ["Marie Curie","the scientist famous for research on radioactivity"], ["Albert Einstein","the scientist famous for the theory of relativity"]]
+    },
+    english: {
+      "Phonics": [["Digraph","two letters that make one sound, like sh"], ["Blend","two or more letter sounds joined together, like bl"], ["Vowel","the letters a, e, i, o and u"], ["Consonant","any letter that is not a vowel"]],
+      "Spelling": [["Homophone","a word that sounds the same as another but is spelled differently"], ["Plural","the form of a word showing more than one"], ["Suffix","letters added to the end of a word, like -ing"], ["Prefix","letters added to the start of a word, like un-"]],
+      "Grammar": [["Noun","a word that names a person, place or thing"], ["Verb","a word that describes an action or state"], ["Adjective","a word that describes a noun"], ["Adverb","a word that describes a verb, often ending in -ly"]],
+      "Punctuation": [["Full Stop","the punctuation mark used to end a sentence"], ["Comma","a punctuation mark used to show a short pause"], ["Question Mark","the punctuation mark used at the end of a question"], ["Apostrophe","used to show possession or to shorten words"]],
+      "Vocabulary": [["Synonym","a word that means almost the same as another word"], ["Antonym","a word that means the opposite of another word"], ["Context Clue","a hint in a text that helps explain a word's meaning"], ["Definition","the exact meaning of a word"]],
+      "Synonyms & Antonyms": [["Happy","a word meaning the same as joyful"], ["Big","a word meaning the same as large"], ["Hot","the opposite of this word is cold"], ["Fast","the opposite of this word is slow"]],
+      "Reading Comprehension": [["Main Idea","the most important point in a piece of writing"], ["Inference","a conclusion you reach using clues in a text"], ["Summary","a short retelling of the main points of a text"], ["Prediction","a guess about what will happen next in a story"]],
+      "Story Elements": [["Setting","the time and place where a story happens"], ["Character","a person or animal in a story"], ["Plot","the sequence of events in a story"], ["Climax","the most exciting or important moment in a story"]],
+      "Poetry": [["Rhyme","when words end with the same sound"], ["Stanza","a group of lines in a poem, like a paragraph"], ["Rhythm","the pattern of beats in a poem"], ["Haiku","a short Japanese poem with three lines"]],
+      "Creative Writing": [["Narrative","a piece of writing that tells a story"], ["Dialogue","the words spoken by characters in a story"], ["Imagery","descriptive language that helps readers picture a scene"], ["Draft","an early version of a piece of writing"]],
+      "Persuasive Writing": [["Persuasive Text","writing that tries to convince the reader of something"], ["Opinion","a personal view, not a proven fact"], ["Argument","a reason given to support a point of view"], ["Call to Action","a sentence urging the reader to do something"]],
+      "Non-fiction Texts": [["Non-fiction","writing based on facts and real events"], ["Biography","a true account of someone else's life"], ["Autobiography","a true account of a person's own life, written by them"], ["Report","a piece of writing that gives facts about a topic"]],
+      "Parts of Speech": [["Pronoun","a word that replaces a noun, like he or it"], ["Preposition","a word that shows position, like under or beside"], ["Conjunction","a word that joins two parts of a sentence, like and"], ["Interjection","a short word showing emotion, like wow"]],
+      "Sentence Structure": [["Subject","the person or thing doing the action in a sentence"], ["Predicate","the part of a sentence that tells what the subject does"], ["Compound Sentence","a sentence made of two joined simple sentences"], ["Clause","a group of words with a subject and a verb"]],
+      "Figures of Speech": [["Simile","a comparison using like or as"], ["Metaphor","a comparison that says one thing is another"], ["Personification","giving human qualities to a non-human thing"], ["Alliteration","repeating the same starting sound in nearby words"]],
+      "Idioms & Sayings": [["Piece of Cake","an idiom meaning something is very easy"], ["Break the Ice","an idiom meaning to start a conversation in an awkward moment"], ["Under the Weather","an idiom meaning feeling unwell"], ["Once in a Blue Moon","an idiom meaning something that rarely happens"]],
+      "Classic Novels": [["Alice in Wonderland","a classic novel about a girl who falls down a rabbit hole"], ["Treasure Island","a classic novel about pirates and a hidden treasure map"], ["Charlotte's Web","a classic novel about a pig and a clever spider"], ["The Jungle Book","a classic novel about a boy raised by animals in the jungle"]],
+      "Shakespeare": [["William Shakespeare","a famous English playwright who lived in the 1500s and 1600s"], ["Romeo and Juliet","a Shakespeare play about two young lovers from feuding families"], ["Globe Theatre","the famous London theatre where Shakespeare's plays were performed"], ["Macbeth","a Shakespeare play about a Scottish king driven by ambition"]],
+      "Famous Authors": [["Roald Dahl","a famous author known for books like Matilda and The BFG"], ["J.K. Rowling","the author who wrote the Harry Potter series"], ["Dr. Seuss","an author famous for rhyming children's books"], ["Jane Austen","a famous English author known for novels like Pride and Prejudice"]],
+      "Book Genres": [["Fantasy","a genre with magic and imaginary worlds"], ["Mystery","a genre where a puzzle or crime is solved"], ["Science Fiction","a genre about future technology, space or science ideas"], ["Adventure","a genre about exciting journeys and challenges"]]
+    },
+    history: {
+      "Prehistoric Times": [["Stone Age","the earliest period of human history, when tools were made of stone"], ["Woolly Mammoth","a large prehistoric animal similar to an elephant with fur"], ["Cave Painting","ancient artwork painted on cave walls by early humans"], ["Hunter-Gatherer","a person who survived by hunting animals and gathering plants"]],
+      "Ancient Egypt": [["Pharaoh","the title given to an ancient Egyptian king or queen"], ["Pyramid","a huge stone structure built as a tomb for a pharaoh"], ["Mummy","a body preserved by ancient Egyptians for the afterlife"], ["River Nile","the great river that ancient Egyptian civilisation grew along"]],
+      "Ancient Greece": [["Democracy","a system of government started in ancient Athens"], ["Olympic Games","an ancient Greek sporting event held every four years"], ["Zeus","the king of the gods in ancient Greek mythology"], ["Parthenon","a famous ancient Greek temple in Athens"]],
+      "Ancient Rome": [["Colosseum","a huge Roman arena used for gladiator fights"], ["Julius Caesar","a famous general and leader of ancient Rome"], ["Gladiator","a Roman fighter who battled for entertainment"], ["Roman Empire","the vast empire that once ruled much of Europe"]],
+      "Ancient China": [["Great Wall of China","a huge wall built to protect ancient China from invaders"], ["Terracotta Army","thousands of clay soldiers buried with China's first emperor"], ["Silk Road","an ancient trade route linking China to the rest of the world"], ["Dynasty","a series of rulers from the same family in ancient China"]],
+      "Ancient India": [["Indus Valley Civilisation","one of the world's earliest civilisations, along the Indus river"], ["Taj Mahal","a famous white marble monument built in India"], ["Ganges River","a sacred river important in ancient and modern India"], ["Spice Trade","the ancient trade of valuable spices from India"]],
+      "Mayans & Aztecs": [["Maya Civilisation","an ancient civilisation in Central America known for pyramids and calendars"], ["Aztec Empire","a powerful ancient empire based in what is now Mexico"], ["Tenochtitlan","the capital city of the Aztec Empire"], ["Chichen Itza","a famous ancient Maya pyramid site"]],
+      "Vikings": [["Viking","a seafaring warrior and trader from Scandinavia"], ["Longship","a fast wooden ship used by the Vikings to sail and raid"], ["Thor","the Viking god of thunder"], ["Runes","the ancient alphabet used for writing by the Vikings"]],
+      "Medieval Times": [["Knight","a warrior in medieval times who fought on horseback"], ["Castle","a fortified building where medieval lords lived for protection"], ["Feudal System","the medieval system where land was exchanged for loyalty and service"], ["Plague","a deadly disease that killed millions in medieval Europe"]],
+      "The Renaissance": [["Renaissance","a period of renewed interest in art, science and learning in Europe"], ["Leonardo da Vinci","a Renaissance artist and inventor who painted the Mona Lisa"], ["Michelangelo","a Renaissance artist famous for the Sistine Chapel ceiling"], ["Printing Press","a Renaissance invention that made books much easier to produce"]],
+      "British Monarchy": [["Monarch","the king or queen who is head of state"], ["Queen Elizabeth II","a British monarch who reigned for over 70 years"], ["Buckingham Palace","the official London residence of the British monarch"], ["Coronation","the ceremony where a new monarch is crowned"]],
+      "Explorers & Expeditions": [["Christopher Columbus","an explorer who sailed across the Atlantic Ocean in 1492"], ["Marco Polo","an explorer famous for travelling the Silk Road to China"], ["Ferdinand Magellan","the explorer whose expedition first sailed around the world"], ["Captain James Cook","an explorer who mapped much of the Pacific Ocean"]],
+      "The Industrial Revolution": [["Industrial Revolution","a period when machines and factories transformed how goods were made"], ["Steam Engine","an invention that powered trains and factories during this time"], ["Factory","a large building where goods were mass-produced"], ["Railway","a new form of transport built widely during this period"]],
+      "World War One": [["World War One","a major global war fought from 1914 to 1918"], ["Trench","a long dug-out shelter used by soldiers in the war"], ["Armistice","the agreement that ended the fighting of World War One"], ["Alliance","a group of countries that agreed to support each other in the war"]],
+      "World War Two": [["World War Two","a major global war fought from 1939 to 1945"], ["Winston Churchill","the British Prime Minister who led Britain through most of the war"], ["D-Day","the day Allied forces landed in Normandy to free Europe"], ["Evacuation","when children were sent away from cities to escape bombing"]],
+      "The Cold War": [["Cold War","a long period of tension between the USA and the Soviet Union"], ["Berlin Wall","a wall that divided East and West Berlin during the Cold War"], ["Space Race","the Cold War competition to be first in space exploration"], ["Iron Curtain","the term for the political divide between Eastern and Western Europe"]],
+      "Civil Rights Movement": [["Civil Rights Movement","a movement fighting for equal rights, especially in the USA"], ["Martin Luther King Jr.","a leader famous for his I Have a Dream speech"], ["Rosa Parks","an activist known for refusing to give up her bus seat"], ["Segregation","the unfair separation of people by race that the movement fought against"]],
+      "American History": [["Declaration of Independence","the 1776 document declaring America's independence from Britain"], ["George Washington","the first President of the United States"], ["American Civil War","a war fought between the northern and southern United States"], ["The White House","the official residence of the President of the United States"]],
+      "Local History": [["Local History","the story of the people and places in your own area"], ["Historical Landmark","a building or site important to an area's history"], ["Oral History","history passed down by people telling their own memories"], ["Museum","a place where historical objects are collected and shown to the public"]],
+      "History of Inventions": [["Wheel","one of humanity's earliest and most important inventions"], ["Printing Press","an invention that made books faster and cheaper to produce"], ["Telephone","an invention that let people talk across long distances"], ["Light Bulb","an invention that brought electric light into homes"]]
+    },
+    geo: {
+      "World Countries": [["Russia","the largest country in the world by land area"], ["Vatican City","the smallest country in the world"], ["China","the country with the largest population in the world"], ["Canada","the second largest country in the world by land area"]],
+      "Capital Cities": [["London","the capital city of the United Kingdom"], ["Paris","the capital city of France"], ["Tokyo","the capital city of Japan"], ["Canberra","the capital city of Australia"]],
+      "Continents & Oceans": [["Asia","the largest continent on Earth"], ["Australia","the smallest continent on Earth"], ["Pacific Ocean","the largest ocean on Earth"], ["Arctic Ocean","the smallest and coldest of the world's oceans"]],
+      "Maps & Atlases": [["Compass Rose","a symbol on a map showing north, south, east and west"], ["Scale","the part of a map showing how distance is represented"], ["Legend","the key on a map that explains its symbols"], ["Atlas","a book made up of maps"]],
+      "Rivers & Lakes": [["River Nile","widely considered the longest river in the world"], ["River Amazon","the river that carries the most water of any river"], ["Lake Superior","the largest of the Great Lakes by surface area"], ["Delta","the area where a river splits and meets the sea"]],
+      "Mountains": [["Mount Everest","the tallest mountain above sea level on Earth"], ["The Alps","a major mountain range across Europe"], ["The Andes","the longest mountain range in the world, in South America"], ["Summit","the highest point of a mountain"]],
+      "Volcanoes & Earthquakes": [["Volcano","an opening in the Earth's crust that can erupt with lava"], ["Magma","melted rock found underground, called lava once it erupts"], ["Earthquake","a sudden shaking of the ground caused by moving rock plates"], ["Tectonic Plates","huge slabs of rock that make up the Earth's crust"]],
+      "Weather & Climate Zones": [["Tropical Zone","a hot, wet climate zone near the equator"], ["Polar Zone","an extremely cold climate zone near the North and South Poles"], ["Temperate Zone","a climate zone with mild weather and four seasons"], ["Equator","the imaginary line around the middle of the Earth"]],
+      "Natural Disasters": [["Hurricane","a powerful spinning storm that forms over warm ocean water"], ["Tsunami","a huge, dangerous wave often caused by an underwater earthquake"], ["Drought","a long period without enough rain"], ["Wildfire","an uncontrolled fire that spreads quickly through dry land"]],
+      "Flags of the World": [["Union Jack","the nickname for the flag of the United Kingdom"], ["Stars and Stripes","the nickname for the flag of the United States"], ["Maple Leaf","the symbol found on the flag of Canada"], ["Rising Sun","the design shown on the flag of Japan"]],
+      "Population & Cities": [["Population","the number of people living in a particular place"], ["Megacity","a city with a population of over 10 million people"], ["Urban Area","a busy, built-up area like a city or town"], ["Rural Area","a quiet area with fields and few buildings, like the countryside"]],
+      "Rainforests": [["Amazon Rainforest","the largest rainforest in the world, mostly in Brazil"], ["Canopy","the upper layer of leaves and branches in a rainforest"], ["Biodiversity","the huge variety of plants and animals found in a rainforest"], ["Deforestation","the cutting down of large areas of forest"]],
+      "Deserts": [["Sahara Desert","the largest hot desert in the world, in Africa"], ["Antarctica","technically the largest desert in the world, made of ice"], ["Oasis","a green area in a desert where water is found"], ["Cactus","a plant well adapted to survive in dry desert conditions"]],
+      "Biomes": [["Tundra","a very cold biome with no trees, found near the poles"], ["Grassland","a biome covered mostly in grass with few trees"], ["Savanna","a warm grassland biome found in parts of Africa"], ["Coral Reef","an ocean biome built by tiny sea creatures called coral"]],
+      "UK Geography": [["United Kingdom","made up of England, Scotland, Wales and Northern Ireland"], ["River Thames","the famous river that flows through London"], ["Ben Nevis","the tallest mountain in the United Kingdom"], ["English Channel","the stretch of water between England and France"]],
+      "Europe": [["Europe","the continent home to countries like France, Germany and Italy"], ["Mediterranean Sea","a sea bordered by southern Europe, north Africa and western Asia"], ["Scandinavia","the northern European region including Norway, Sweden and Denmark"], ["Eiffel Tower","a famous landmark in Paris, France"]],
+      "Africa": [["Africa","the second largest continent, home to 54 countries"], ["Sahara Desert","the vast desert that covers much of northern Africa"], ["River Nile","the long river that flows through north-east Africa"], ["Savanna","the grassland habitat home to lions, elephants and zebras in Africa"]],
+      "Asia": [["Asia","the largest and most populated continent in the world"], ["Mount Everest","the tallest mountain in the world, located in Asia"], ["Great Wall of China","a famous ancient landmark found in Asia"], ["Himalayas","the mountain range that separates India from the Tibetan Plateau"]],
+      "The Americas": [["North America","the continent home to Canada, the USA and Mexico"], ["South America","the continent home to the Amazon Rainforest and the Andes"], ["Amazon River","the mighty river that flows through South America"], ["Panama Canal","a famous waterway connecting the Atlantic and Pacific oceans"]],
+      "Oceania": [["Australia","the largest country in the region of Oceania"], ["Great Barrier Reef","the world's largest coral reef system, off Australia"], ["New Zealand","an island country in Oceania known for its mountains"], ["Pacific Islands","the many small island nations found across Oceania"]]
+    },
+    arts: {
+      "Art History": [["Renaissance Art","art from a period famous for realistic detail and perspective"], ["Impressionism","an art style focused on light and quick brushstrokes"], ["Cave Art","some of the earliest known art, painted by ancient humans"], ["Portrait","a piece of art showing a person's face or figure"]],
+      "Famous Artists": [["Leonardo da Vinci","the artist who painted the Mona Lisa"], ["Vincent van Gogh","the artist famous for painting The Starry Night"], ["Pablo Picasso","the artist known for founding the Cubism art style"], ["Claude Monet","the artist famous for painting water lilies"]],
+      "Drawing & Painting": [["Sketch","a quick, rough drawing"], ["Watercolour","a type of paint mixed with water for a light effect"], ["Canvas","the fabric surface artists often paint on"], ["Still Life","a painting of objects like fruit or flowers"]],
+      "Color Theory": [["Primary Colours","red, blue and yellow, the colours all others are mixed from"], ["Secondary Colours","colours made by mixing two primary colours, like green"], ["Warm Colours","colours like red, orange and yellow that feel energetic"], ["Cool Colours","colours like blue, green and purple that feel calm"]],
+      "Sculpture": [["Sculpture","a three-dimensional work of art"], ["Statue","a sculpture that often represents a person or animal"], ["Marble","a type of stone often used for classical sculptures"], ["Bronze","a metal often cast to make statues"]],
+      "Photography": [["Camera","a device used to capture photographs"], ["Lens","the part of a camera that focuses light"], ["Exposure","how much light reaches the camera's sensor or film"], ["Portrait Photography","photography that focuses on capturing a person"]],
+      "Music Theory": [["Note","a single sound with a particular pitch in music"], ["Rhythm","the pattern of beats in a piece of music"], ["Melody","a sequence of notes that forms a tune"], ["Tempo","how fast or slow a piece of music is played"]],
+      "Musical Instruments": [["Piano","an instrument played using black and white keys"], ["Violin","a stringed instrument played with a bow"], ["Drums","a percussion instrument played by hitting it"], ["Flute","a woodwind instrument played by blowing across a hole"]],
+      "Famous Composers": [["Ludwig van Beethoven","a famous composer who kept writing music after losing his hearing"], ["Wolfgang Amadeus Mozart","a composer famous for writing music from a very young age"], ["Johann Sebastian Bach","a composer famous for complex Baroque music"], ["Tchaikovsky","the composer who wrote The Nutcracker"]],
+      "Dance Styles": [["Ballet","a graceful dance style often performed in pointe shoes"], ["Hip Hop","an energetic street dance style"], ["Tap Dance","a dance style using metal plates on the shoes to make sound"], ["Ballroom Dance","a formal partner dance style, like the waltz"]],
+      "Drama & Theatre": [["Playwright","a person who writes plays"], ["Stage","the area where a play is performed"], ["Script","the written text of a play, including dialogue"], ["Actor","a person who performs a role in a play or film"]],
+      "Film & Cinema": [["Director","the person in charge of making a film"], ["Animation","a film technique that makes drawings or models appear to move"], ["Special Effects","tricks used in film to create things that aren't really there"], ["Documentary","a film based on real facts and events"]],
+      "Animation & Cartoons": [["Animation","the technique of making still images appear to move"], ["Frame","a single image in an animated sequence"], ["Stop Motion","an animation technique using real objects photographed frame by frame"], ["Storyboard","a sequence of drawings that plan out a story before filming"]],
+      "Architecture": [["Architect","a person who designs buildings"], ["Blueprint","a detailed plan used to construct a building"], ["Skyscraper","a very tall building found in big cities"], ["Dome","a rounded roof shaped like half a ball"]],
+      "Fashion History": [["Toga","a piece of clothing worn by people in ancient Rome"], ["Corset","a tight, structured garment once commonly worn by women"], ["Denim","a sturdy cotton fabric commonly used to make jeans"], ["Fashion Designer","a person who creates new clothing styles"]],
+      "Pottery & Crafts": [["Pottery","objects made from clay and hardened by fire"], ["Kiln","a special oven used to bake and harden pottery"], ["Weaving","a craft technique that interlaces threads to make cloth"], ["Ceramic","a hard material made by firing clay at high heat"]],
+      "World Mythology": [["Zeus","the king of the gods in Greek mythology"], ["Thor","the Norse god of thunder"], ["Anubis","the Egyptian god associated with the afterlife"], ["Medusa","a Greek mythological creature with snakes for hair"]],
+      "World Religions": [["Christianity","a religion based on the teachings of Jesus Christ"], ["Islam","a religion based on the teachings of the Prophet Muhammad"], ["Buddhism","a religion based on the teachings of Buddha"], ["Hinduism","one of the world's oldest religions, practised widely in India"]],
+      "Festivals & Traditions": [["Diwali","a Hindu festival of lights"], ["Chinese New Year","a festival celebrating the start of the lunar new year"], ["Eid al-Fitr","a Muslim festival celebrating the end of Ramadan"], ["Carnival","a colourful festival with parades, music and costumes"]],
+      "Design Basics": [["Pattern","a repeated design or sequence"], ["Symmetry","when both sides of a design match each other"], ["Contrast","a strong difference between elements in a design, like light and dark"], ["Layout","how elements are arranged in a design"]]
+    },
+    tech: {
+      "Computer Basics": [["CPU","the part of a computer often called its brain"], ["RAM","a type of computer memory used for short-term storage while running programs"], ["Hard Drive","the part of a computer that stores files long-term"], ["Motherboard","the main circuit board that connects all computer parts"]],
+      "Coding Fundamentals": [["Code","instructions written for a computer to follow"], ["Loop","a piece of code that repeats an action"], ["Variable","a container used to store a value in code"], ["Bug","a mistake in code that causes it to work incorrectly"]],
+      "Scratch Coding": [["Scratch","a beginner coding platform that uses drag-and-drop blocks"], ["Sprite","a character or object you can control in Scratch"], ["Block","a piece of code you snap together in Scratch"], ["Event Block","a Scratch block that starts a script, like when flag clicked"]],
+      "Python Coding": [["Python","a popular and beginner-friendly coding language"], ["Print Statement","a line of code used to display text on screen"], ["Function","a named, reusable block of code"], ["Indentation","the spacing used in Python to organise code"]],
+      "Web Design Basics": [["HTML","the language used to structure content on a webpage"], ["CSS","the language used to style how a webpage looks"], ["Browser","the software used to view websites, like Chrome or Safari"], ["Hyperlink","clickable text or image that takes you to another page"]],
+      "Algorithms & Logic": [["Algorithm","a step-by-step set of instructions to solve a problem"], ["Flowchart","a diagram that shows the steps of a process"], ["Sequence","the order in which steps happen in an algorithm"], ["Debugging","the process of finding and fixing errors in code"]],
+      "Artificial Intelligence": [["Artificial Intelligence","technology that lets computers perform tasks that normally need human thinking"], ["Machine Learning","a type of AI that learns patterns from data"], ["Chatbot","a computer program designed to have conversations with people"], ["Neural Network","a computer system loosely inspired by how the brain works"]],
+      "Robotics": [["Robot","a machine that can be programmed to carry out tasks"], ["Sensor","a part of a robot that detects things like light or sound"], ["Actuator","a robot part that creates movement, like a motor"], ["Automation","using machines to do tasks without human help"]],
+      "Internet Safety": [["Password","a secret code used to keep an account secure"], ["Personal Information","details like your name or address that should be kept private online"], ["Cyberbullying","using the internet to hurt or upset someone"], ["Privacy Settings","options that control who can see your information online"]],
+      "Cybersecurity Basics": [["Firewall","a security system that blocks unwanted access to a network"], ["Virus","harmful software that can damage a computer"], ["Phishing","a trick used to steal personal information online"], ["Encryption","a way of scrambling data so only the right person can read it"]],
+      "Video Game Design": [["Game Designer","a person who plans how a video game works and feels"], ["Level","a section or stage within a video game"], ["Game Engine","software used to build and run video games"], ["Playtesting","trying out a game to find problems before it is released"]],
+      "Digital Art": [["Digital Art","artwork created or edited using computers"], ["Pixel","the smallest single point of colour in a digital image"], ["Graphics Tablet","a device used to draw digitally with a pen-like stylus"], ["Layer","a separate level in digital art software that can be edited on its own"]],
+      "Hardware vs Software": [["Hardware","the physical parts of a computer you can touch"], ["Software","the programs and instructions that run on a computer"], ["Peripheral","an external device like a mouse or printer connected to a computer"], ["Operating System","the main software that manages a computer, like Windows or macOS"]],
+      "Apps & Software": [["App","a program designed for a phone, tablet or computer"], ["Update","a new version of software that fixes or improves it"], ["Download","to copy a file or app from the internet to a device"], ["Interface","the part of an app or program you see and interact with"]],
+      "Data & Databases": [["Database","an organised collection of information stored on a computer"], ["Data","information that can be stored and used by a computer"], ["Spreadsheet","a program used to organise data into rows and columns"], ["Search Query","the words you type to look something up in a database or search engine"]],
+      "3D Printing": [["3D Printer","a machine that builds solid objects layer by layer"], ["3D Model","a digital design used to create a 3D printed object"], ["Filament","the material, often plastic, fed into a 3D printer"], ["Prototype","an early test version of a design"]],
+      "Space Technology": [["Satellite","a device that orbits Earth to send and receive signals"], ["GPS","a satellite system used to figure out your exact location"], ["Space Probe","an uncrewed spacecraft sent to explore space"], ["Rover","a vehicle used to explore the surface of another planet"]],
+      "Social Media Literacy": [["Social Media","online platforms used to share content and connect with others"], ["Fake News","false information shared as if it were true"], ["Digital Footprint","the trail of information you leave behind online"], ["Screen Time","the amount of time spent using a screen device"]],
+      "History of Computing": [["Charles Babbage","often called the father of the computer for his early designs"], ["Ada Lovelace","considered the world's first computer programmer"], ["Alan Turing","a mathematician famous for his work on early computing"], ["Floppy Disk","an early, now outdated way of storing computer data"]],
+      "Future Technology": [["Virtual Reality","technology that creates a fully digital world you can experience"], ["Augmented Reality","technology that adds digital images onto the real world"], ["Self-Driving Car","a car designed to drive itself using sensors and computers"], ["Wearable Technology","devices worn on the body, like smartwatches"]]
+    },
+    life: {
+      "Healthy Eating": [["Balanced Diet","eating a healthy mix of different food groups"], ["Food Pyramid","a diagram showing how much of each food group to eat"], ["Protein","a nutrient found in meat, eggs and beans that helps build muscle"], ["Hydration","drinking enough water to keep your body healthy"]],
+      "Cooking Basics": [["Recipe","a set of instructions for preparing a dish"], ["Ingredient","one of the items used to make a recipe"], ["Boiling","cooking food in very hot, bubbling water"], ["Food Hygiene","keeping food and cooking areas clean and safe"]],
+      "Physical Education": [["Warm-up","gentle exercise done before intense activity to prepare the body"], ["Cardiovascular Fitness","how well your heart and lungs work during exercise"], ["Flexibility","the ability to move joints through a full range of motion"], ["Cool-down","gentle exercise done after activity to help the body recover"]],
+      "Sports Rules": [["Foul","breaking the rules of a sport"], ["Referee","the official who enforces the rules during a game"], ["Offside","a football rule about a player's position when the ball is played"], ["Penalty","a punishment given for breaking a sport's rules"]],
+      "Team Sports": [["Football","a team sport played by kicking a ball into a goal"], ["Basketball","a team sport where players score by shooting a ball through a hoop"], ["Rugby","a team sport involving carrying and passing an oval ball"], ["Cricket","a team sport played with a bat and ball, popular in the UK"]],
+      "Athletics": [["Sprint","a short, very fast running race"], ["Relay Race","a race where team members take turns running with a baton"], ["Long Jump","an athletics event where competitors jump as far as possible"], ["Javelin","an athletics event involving throwing a long spear-like object"]],
+      "Swimming": [["Freestyle","the fastest common swimming stroke, also called front crawl"], ["Backstroke","a swimming stroke performed while lying on your back"], ["Breaststroke","a swimming stroke with a frog-like kick and arm movement"], ["Lifeguard","a trained person who watches over swimmers to keep them safe"]],
+      "Olympic Games": [["Olympic Games","a major international sporting event held every four years"], ["Olympic Rings","the five interlocking rings symbol of the Olympics"], ["Gold Medal","the medal awarded to the winner of an Olympic event"], ["Olympic Torch","the flame carried and lit to open the Olympic Games"]],
+      "First Aid Basics": [["First Aid","immediate help given to someone who is injured or unwell"], ["Recovery Position","a safe position used to help an unconscious but breathing person"], ["Plaster","a small sticky bandage used to cover minor cuts"], ["Emergency Number","the number to call for urgent help, like 999 in the UK"]],
+      "Mental Wellbeing": [["Mental Wellbeing","how healthy and positive a person feels emotionally"], ["Mindfulness","paying calm attention to the present moment"], ["Resilience","the ability to recover from difficulties"], ["Self-Care","activities done to look after your own physical and mental health"]],
+      "Money & Budgeting": [["Budget","a plan for how to spend and save money"], ["Savings","money kept aside instead of being spent right away"], ["Income","money that is earned or received"], ["Interest","extra money earned on savings or owed on a loan"]],
+      "Road Safety": [["Zebra Crossing","a striped road crossing where pedestrians have priority"], ["Highway Code","the official rules for using roads safely in the UK"], ["Seatbelt","a safety strap worn in a vehicle to prevent injury"], ["Pedestrian","a person travelling on foot"]],
+      "Manners & Etiquette": [["Politeness","being respectful and considerate in how you speak and act"], ["Table Manners","polite behaviour expected while eating with others"], ["Please and Thank You","simple polite words used when asking for or receiving something"], ["Respect","treating others with consideration and kindness"]],
+      "Time Management": [["Schedule","a plan showing when tasks or events will happen"], ["Priority","the task that is most important to do first"], ["Deadline","the latest time something must be finished by"], ["Routine","a regular sequence of actions done at set times"]],
+      "Animal Care": [["Vet","a doctor who is trained to treat animals"], ["Pet","an animal kept and cared for at home"], ["Microchip","a tiny device used to help identify a lost pet"], ["Vaccination","an injection that helps protect an animal from disease"]],
+      "Gardening": [["Seed","the part of a plant from which a new plant grows"], ["Soil","the material in the ground where plants grow their roots"], ["Compost","decayed plant material used to enrich soil"], ["Pruning","trimming a plant to help it grow well"]],
+      "Recycling & Sustainability": [["Recycling","turning waste materials into new products"], ["Sustainability","using resources in a way that protects them for the future"], ["Compostable","material that can naturally break down and enrich soil"], ["Carbon Footprint","the amount of carbon dioxide produced by a person's activities"]],
+      "Yoga & Mindfulness": [["Yoga","an exercise practice combining poses, breathing and calm focus"], ["Breathing Exercise","a technique using slow, controlled breaths to relax"], ["Meditation","a practice of quiet focus used to calm the mind"], ["Balance Pose","a yoga pose that trains stability on one part of the body"]],
+      "Travel & Cultures": [["Culture","the customs, ideas and way of life of a group of people"], ["Passport","an official document needed to travel to other countries"], ["Tourist","a person who travels to visit a place for pleasure"], ["Tradition","a custom passed down through generations"]],
+      "Career Exploration": [["Career","a person's long-term path of work and jobs"], ["Apprenticeship","a job where you learn a skill while training on the job"], ["CV","a document listing a person's skills and work experience"], ["Interview","a meeting where an employer asks questions to consider hiring someone"]]
+    },
+    lang: {
+      "French": [["Bonjour","the French word for hello"], ["Merci","the French word for thank you"], ["Au Revoir","the French phrase for goodbye"], ["Oui","the French word for yes"]],
+      "Spanish": [["Hola","the Spanish word for hello"], ["Gracias","the Spanish word for thank you"], ["Adios","the Spanish word for goodbye"], ["Si","the Spanish word for yes"]],
+      "German": [["Hallo","the German word for hello"], ["Danke","the German word for thank you"], ["Auf Wiedersehen","the German phrase for goodbye"], ["Ja","the German word for yes"]],
+      "Italian": [["Ciao","an Italian word used for both hello and goodbye"], ["Grazie","the Italian word for thank you"], ["Si","the Italian word for yes"], ["Buongiorno","the Italian phrase for good morning"]],
+      "Mandarin Chinese": [["Ni Hao","a common Mandarin Chinese greeting meaning hello"], ["Xie Xie","the Mandarin Chinese phrase for thank you"], ["Mandarin Chinese","the most widely spoken language in the world by native speakers"], ["Pinyin","a system that writes Mandarin Chinese sounds using the Latin alphabet"]],
+      "Japanese": [["Konnichiwa","the Japanese word for hello"], ["Arigatou","the Japanese word for thank you"], ["Hiragana","one of the writing systems used in Japanese"], ["Sayonara","a Japanese word for goodbye"]],
+      "Portuguese": [["Ola","the Portuguese word for hello"], ["Obrigado","the Portuguese word for thank you"], ["Brazil","the largest country where Portuguese is the main language"], ["Sim","the Portuguese word for yes"]],
+      "Arabic": [["Marhaba","an Arabic word meaning hello"], ["Shukran","the Arabic word for thank you"], ["Arabic","a language written from right to left"], ["Salam","an Arabic word often used as a greeting meaning peace"]],
+      "Greek": [["Yassou","a common Greek greeting meaning hello"], ["Efcharisto","the Greek word for thank you"], ["Greek Alphabet","the alphabet that gave the world letters like alpha and beta"], ["Ancient Greek","the language many scientific and mathematical terms come from"]],
+      "Latin": [["Latin","the ancient language of the Romans"], ["Et Cetera","a Latin phrase meaning and so on, often shortened to etc"], ["Veni Vidi Vici","a famous Latin phrase meaning I came, I saw, I conquered"], ["Carpe Diem","a Latin phrase meaning seize the day"]],
+      "Welsh": [["Welsh","a language spoken in Wales, part of the United Kingdom"], ["Bore Da","the Welsh phrase for good morning"], ["Diolch","the Welsh word for thank you"], ["Cymru","the Welsh name for the country of Wales"]],
+      "British Sign Language": [["British Sign Language","a visual language used by many deaf people in the UK"], ["Finger Spelling","spelling out words letter by letter using hand shapes"], ["Sign","a hand gesture used in sign language to represent a word or idea"], ["Deaf Community","a community of people who are deaf and often use sign language"]],
+      "Word Origins": [["Etymology","the study of where words come from and how they changed"], ["Loanword","a word borrowed from another language"], ["Root Word","the basic part of a word that carries its main meaning"], ["Latin Root","a word part from Latin used in many English words"]],
+      "Language Families": [["Romance Languages","languages like French, Spanish and Italian that come from Latin"], ["Germanic Languages","a language family that includes English and German"], ["Language Family","a group of languages that share a common ancestor language"], ["Bilingual","a person who speaks two languages fluently"]],
+      "Idioms Around the World": [["Raining Cats and Dogs","an English idiom meaning it is raining very heavily"], ["Not My Cup of Tea","an English idiom meaning something is not to your liking"], ["Other Fish to Fry","an idiom meaning to have more important things to do"], ["Idiom","a phrase whose meaning isn't obvious from its individual words"]],
+      "Emoji & Symbols": [["Emoji","a small digital image used to express an idea or feeling"], ["Emoticon","a face made from keyboard characters, like a smiley"], ["Symbol","a sign that represents an idea without using words"], ["Pictogram","a picture that represents a word or idea, used in some ancient writing"]],
+      "Morse Code": [["Morse Code","a system that represents letters using dots and dashes"], ["SOS","the famous Morse code distress signal"], ["Samuel Morse","the inventor credited with developing Morse code"], ["Dot and Dash","the two basic signals used to build every letter in Morse code"]],
+      "Braille Basics": [["Braille","a system of raised dots that lets blind people read by touch"], ["Louis Braille","the Frenchman who invented the braille reading system"], ["Braille Cell","the small group of raised dots used to represent each braille character"], ["Tactile Reading","reading using touch instead of sight"]],
+      "Phonetic Alphabet": [["NATO Phonetic Alphabet","a system using words like Alpha and Bravo for letters"], ["Alpha","the NATO phonetic alphabet word used for the letter A"], ["Bravo","the NATO phonetic alphabet word used for the letter B"], ["Phonetic Alphabet","a system designed to avoid confusion when spelling words aloud"]],
+      "Learning a Language": [["Vocabulary","the collection of words a person knows in a language"], ["Fluency","the ability to speak a language smoothly and confidently"], ["Immersion","learning a language by being fully surrounded by it"], ["Practice","regularly using a language, which helps you learn it faster"]]
+    },
+    fun: {
+      "General Knowledge": [["Seven","the number of continents on Earth"], ["Blue Whale","the largest animal to have ever lived on Earth"], ["Water","the substance made from hydrogen and oxygen with the formula H2O"], ["206","the approximate number of bones in an adult human body"]],
+      "Brain Teasers": [["Lateral Thinking","solving a puzzle using an indirect, creative approach"], ["Riddle","a puzzling question designed to test cleverness"], ["Pattern","a repeating sequence that can be used to solve a puzzle"], ["Logic Grid","a puzzle solved by working out clues in a grid"]],
+      "Riddles": [["Echo","something that speaks without a mouth and hears without ears"], ["Candle","something that gets shorter as it burns and gives off light"], ["Map","something you can fold but it never actually breaks"], ["Keyboard","something with keys but it opens no locks"]],
+      "Logic Puzzles": [["Deduction","working out an answer using clues and reasoning"], ["Venn Diagram","overlapping circles used to compare and sort groups of things"], ["Sequence Puzzle","a puzzle where you must find the next item in a pattern"], ["Sudoku","a number puzzle solved using logic on a 9 by 9 grid"]],
+      "Mixed Trivia": [["Big Ben","the nickname of the famous clock tower in London"], ["Mona Lisa","the world-famous painting by Leonardo da Vinci"], ["Great Wall of China","a structure so long it stretches for thousands of miles"], ["Sahara","the largest hot desert in the world"]],
+      "Guess the Animal": [["Cheetah","the fastest land animal in the world"], ["Giraffe","the tallest land animal in the world"], ["Owl","a bird known for being able to turn its head very far around"], ["Octopus","a sea animal with eight arms and three hearts"]],
+      "Guess the Country": [["Japan","a country known as the Land of the Rising Sun"], ["Australia","a country and continent home to kangaroos and koalas"], ["Egypt","a country famous for its ancient pyramids"], ["Brazil","the largest country in South America, famous for the Amazon"]],
+      "Movie Trivia": [["Animated Film","a movie made using drawings, computer graphics or models instead of live actors"], ["Box Office","the total money a film earns from ticket sales"], ["Sequel","a movie that continues the story of an earlier film"], ["Soundtrack","the music featured throughout a film"]],
+      "Music Trivia": [["Album","a collection of songs released together"], ["Chart","a ranking list showing the most popular songs"], ["Genre","a category of music, like pop, rock or classical"], ["Lyrics","the words sung in a song"]],
+      "Sports Trivia": [["World Cup","a major international football tournament held every four years"], ["Wimbledon","a famous annual tennis tournament held in London"], ["Marathon","a long-distance running race of just over 26 miles"], ["Formula 1","a famous international motor racing competition"]],
+      "Food & Cooking Trivia": [["Pizza","a popular dish that originated in Italy"], ["Honey","a food that never spoils if it is stored properly"], ["Chocolate","a sweet food made from roasted cacao beans"], ["Sushi","a traditional Japanese dish often made with rice and fish"]],
+      "Space Trivia": [["Moon","the natural satellite that orbits the Earth"], ["Mars","the planet often called the Red Planet"], ["Milky Way","the name of the galaxy that contains our solar system"], ["Astronaut","someone trained to travel and work in space"]],
+      "Dinosaurs": [["Tyrannosaurus Rex","a huge carnivorous dinosaur with tiny arms"], ["Triceratops","a dinosaur known for its three horns and large frill"], ["Fossil","the preserved remains of a dinosaur or ancient creature"], ["Extinction","when a species, like the dinosaurs, dies out completely"]],
+      "Under the Sea": [["Coral Reef","a colourful underwater ecosystem built by tiny sea animals"], ["Shark","a fish that has existed for hundreds of millions of years"], ["Jellyfish","a sea creature that has no brain, bones or heart"], ["Dolphin","an intelligent sea mammal known for its playful behaviour"]],
+      "Insects & Minibeasts": [["Ant","an insect known for its incredible strength for its size"], ["Butterfly","an insect that starts life as a caterpillar"], ["Bee","an insect that helps pollinate flowers and makes honey"], ["Spider","a minibeast with eight legs that spins webs to catch food"]],
+      "Inventions & Inventors": [["Thomas Edison","an inventor credited with developing the practical light bulb"], ["Wright Brothers","the inventors credited with building the first successful aeroplane"], ["Alexander Graham Bell","the inventor credited with inventing the telephone"], ["Tim Berners-Lee","the British inventor of the World Wide Web"]],
+      "Natural Wonders": [["Grand Canyon","a huge, deep canyon carved by the Colorado River in the USA"], ["Niagara Falls","a famous set of waterfalls on the border of the USA and Canada"], ["Great Barrier Reef","the largest coral reef system in the world, off Australia"], ["Northern Lights","a natural light display seen in the night sky near the poles"]],
+      "World Records": [["Guinness World Records","the famous book that tracks record-breaking achievements"], ["Usain Bolt","the sprinter who holds the world record for the 100m"], ["Mount Everest","the record holder for the world's tallest mountain"], ["Blue Whale","the record holder for the largest animal on Earth"]],
+      "Mystery & Detective": [["Sherlock Holmes","a famous fictional detective known for his clever deductions"], ["Clue","a piece of evidence that helps solve a mystery"], ["Alibi","proof that a suspect was somewhere else when something happened"], ["Detective","a person, real or fictional, trained to investigate and solve crimes"]],
+      "Myths & Legends": [["Dragon","a legendary creature often shown as a giant fire-breathing reptile"], ["Unicorn","a legendary creature shown as a horse with a single horn"], ["Loch Ness Monster","a legendary creature said to live in a Scottish lake"], ["Phoenix","a mythical bird said to be reborn from its own ashes"]]
+    }
+  };
+
+  /* ================= MATH QUESTION ENGINE (procedural, no fact bank needed) ================= */
+  function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+  function pick(arr){ return arr[randInt(0, arr.length-1)]; }
+  function gcd(a,b){ a=Math.abs(a); b=Math.abs(b); while(b){ var t=b; b=a%b; a=t; } return a||1; }
+  function makeMC(correctStr, distractorFn){
+    var vals = [correctStr]; var guard = 0;
+    while(vals.length < 4 && guard < 60){
+      guard++;
+      var d = distractorFn();
+      if(d !== undefined && d !== null && vals.indexOf(d) === -1) vals.push(d);
+    }
+    while(vals.length < 4){ vals.push(correctStr + ' '); }
+    for(var i=vals.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=vals[i]; vals[i]=vals[j]; vals[j]=t; }
+    return { options: vals, correct: vals.indexOf(correctStr) };
+  }
+  function scaleFor(year){
+    var table = [
+      {add:12, mult:5, den:4, algMax:10, pctset:[10,25,50], maxP:300},
+      {add:20, mult:5, den:4, algMax:12, pctset:[10,25,50], maxP:500},
+      {add:50, mult:10, den:5, algMax:20, pctset:[10,25,50,75], maxP:800},
+      {add:100, mult:10, den:6, algMax:30, pctset:[10,25,50,75], maxP:1200},
+      {add:200, mult:12, den:8, algMax:50, pctset:[10,20,25,50,75], maxP:1500},
+      {add:500, mult:12, den:10, algMax:80, pctset:[10,15,20,25,50,75], maxP:2000},
+      {add:1000, mult:15, den:10, algMax:120, pctset:[5,10,15,20,25,30,50,75], maxP:2500},
+      {add:2000, mult:20, den:12, algMax:180, pctset:[5,10,12,15,20,25,30,40,60,75], maxP:3000},
+      {add:5000, mult:25, den:12, algMax:300, pctset:[3,5,8,12,15,18,22,35,45,65], maxP:4000},
+      {add:10000, mult:30, den:20, algMax:500, pctset:[4,6,9,13,17,23,28,33,55,85], maxP:5000}
+    ];
+    return table[Math.min(Math.max(year,1),10)-1];
+  }
+
+  function genNumberSense(year){
+    var s = scaleFor(year);
+    if(Math.random()<0.5){
+      var nums=[]; while(nums.length<4){ var n=randInt(1, s.add*3); if(nums.indexOf(n)===-1) nums.push(n); }
+      var wantMax = Math.random()<0.5;
+      var target = wantMax ? Math.max.apply(null,nums) : Math.min.apply(null,nums);
+      return { q:'Which of these numbers is the '+(wantMax?'largest':'smallest')+'?', options:nums.map(String), correct:nums.indexOf(target) };
+    } else {
+      var base = year<=4?10:(year<=7?100:1000);
+      var n = randInt(base*2, s.add*6);
+      var correct = Math.round(n/base)*base;
+      var mc = makeMC(String(correct), function(){ var off=pick([1,2,-1,-2]); return String(correct+off*base); });
+      return { q:'Round '+n+' to the nearest '+base+'.', options:mc.options, correct:mc.correct };
+    }
+  }
+  function genAddition(year){ var s=scaleFor(year); var a=randInt(1,s.add), b=randInt(1,s.add); var correct=a+b;
+    var mc=makeMC(String(correct), function(){ return String(correct+pick([-10,-5,-2,-1,1,2,5,10])); });
+    return { q:'What is '+a+' + '+b+'?', options:mc.options, correct:mc.correct }; }
+  function genSubtraction(year){ var s=scaleFor(year); var a=randInt(1,s.add), b=randInt(1,s.add);
+    if(b>a){ var t=a; a=b; b=t; } var correct=a-b;
+    var mc=makeMC(String(correct), function(){ return String(correct+pick([-10,-5,-2,-1,1,2,5,10])); });
+    return { q:'What is '+a+' - '+b+'?', options:mc.options, correct:mc.correct }; }
+  function genMultiplication(year){ var s=scaleFor(year); var a=randInt(2,s.mult), b=randInt(2,s.mult); var correct=a*b;
+    var mc=makeMC(String(correct), function(){ return String(correct+pick([-a,a,-b,b,-1,1,2,-2])); });
+    return { q:'What is '+a+' \u00d7 '+b+'?', options:mc.options, correct:mc.correct }; }
+  function genDivision(year){ var s=scaleFor(year); var d=randInt(2,s.mult), q=randInt(2,s.mult); var dividend=d*q;
+    var mc=makeMC(String(q), function(){ return String(q+pick([-2,-1,1,2,3,-3])); });
+    return { q:'What is '+dividend+' \u00f7 '+d+'?', options:mc.options, correct:mc.correct }; }
+  function genFractions(year){ var s=scaleFor(year); var den=randInt(2,s.den); var num = year<=3?1:randInt(1,den-1);
+    var mult=randInt(2,10); var whole=den*mult; var correct=Math.round(whole*num/den);
+    var mc=makeMC(String(correct), function(){ return String(correct+pick([-mult,mult,-2*mult,2*mult,-1,1])); });
+    return { q:'What is '+num+'/'+den+' of '+whole+'?', options:mc.options, correct:mc.correct }; }
+  function genDecimals(year){ var maxWhole = year<=4?9:(year<=7?50:200);
+    var a = +(randInt(0,maxWhole) + randInt(0,9)/10).toFixed(1);
+    var b = +(randInt(0,maxWhole) + randInt(0,9)/10).toFixed(1);
+    var correct = +(a+b).toFixed(1);
+    var mc = makeMC(correct.toFixed(1), function(){ return (correct + pick([-1,-0.5,0.5,1,2,-2])).toFixed(1); });
+    return { q:'What is '+a.toFixed(1)+' + '+b.toFixed(1)+'?', options:mc.options, correct:mc.correct }; }
+  function genPercentages(year){ var s=scaleFor(year); var p=pick(s.pctset); var n=randInt(2,20)*20; var correct=Math.round(n*p/100);
+    var mc=makeMC(String(correct), function(){ return String(correct+pick([-10,-5,5,10,-20,20])); });
+    return { q:'What is '+p+'% of '+n+'?', options:mc.options, correct:mc.correct }; }
+  function genRatio(year){ var pairs=[[1,2],[1,3],[2,3],[1,4],[3,4],[2,5],[3,5],[1,5]]; var pr=pick(pairs); var k=randInt(2,10);
+    var total=(pr[0]+pr[1])*k; var larger=Math.max(pr[0],pr[1])*k;
+    var mc=makeMC(String(larger), function(){ return String(larger+pick([-k,k,-2*k,2*k])); });
+    return { q:'Share '+total+' in the ratio '+pr[0]+':'+pr[1]+'. What is the larger share?', options:mc.options, correct:mc.correct }; }
+  function genAlgebra(year){ var s=scaleFor(year); var x=randInt(1,s.algMax);
+    if(year<=5){ var a=randInt(1,s.algMax); var b=x+a;
+      var mc=makeMC(String(x), function(){ return String(x+pick([-3,-2,-1,1,2,3])); });
+      return { q:'If x + '+a+' = '+b+', what is x?', options:mc.options, correct:mc.correct };
+    } else { var m=randInt(2,5); var a=randInt(1,s.algMax); var b=m*x+a;
+      var mc=makeMC(String(x), function(){ return String(x+pick([-3,-2,-1,1,2,3])); });
+      return { q:'If '+m+'x + '+a+' = '+b+', what is x?', options:mc.options, correct:mc.correct };
+    } }
+  var SHAPES=[['Triangle',3],['Square',4],['Rectangle',4],['Pentagon',5],['Hexagon',6],['Heptagon',7],['Octagon',8],['Nonagon',9],['Decagon',10]];
+  function genGeometry(year){ var maxIdx = year<=3?4:(year<=6?7:9); var options=SHAPES.slice(0,maxIdx); var sh=pick(options); var correct=sh[1];
+    var mc=makeMC(String(correct), function(){ return String(correct+pick([-2,-1,1,2,3])); });
+    return { q:'How many sides does a '+sh[0]+' have?', options:mc.options, correct:mc.correct }; }
+  function genAngles(year){ var mode = year<=4?'straight':(year<=7?pick(['straight','right']):pick(['straight','right','triangle']));
+    if(mode==='straight'){ var a=randInt(20,160); var correct=180-a;
+      var mc=makeMC(String(correct), function(){ return String(correct+pick([-20,-10,10,20])); });
+      return { q:'Two angles sit on a straight line. One is '+a+'\u00b0. What is the other angle?', options:mc.options, correct:mc.correct };
+    } else if(mode==='right'){ var a2=randInt(10,80); var correct2=90-a2;
+      var mc2=makeMC(String(correct2), function(){ return String(correct2+pick([-15,-5,5,15])); });
+      return { q:'A right angle is split into two parts. One part is '+a2+'\u00b0. What is the other part?', options:mc2.options, correct:mc2.correct };
+    } else { var a3=randInt(30,90); var b3=randInt(30, 170-a3); var correct3=180-a3-b3;
+      var mc3=makeMC(String(correct3), function(){ return String(correct3+pick([-20,-10,10,20])); });
+      return { q:'A triangle has angles of '+a3+'\u00b0 and '+b3+'\u00b0. What is the third angle?', options:mc3.options, correct:mc3.correct };
+    } }
+  var SYMM=[['Square',4],['Rectangle',2],['Equilateral Triangle',3],['Regular Pentagon',5],['Regular Hexagon',6],['Isosceles Triangle',1],['Circle','Infinite']];
+  function genSymmetry(){ var sh=pick(SYMM); var correct=String(sh[1]);
+    var mc=makeMC(correct, function(){ return String(pick([0,1,2,3,4,5,6])); });
+    return { q:'How many lines of symmetry does a '+sh[0]+' have?', options:mc.options, correct:mc.correct }; }
+  var CONV=[['cm','m',100],['m','km',1000],['g','kg',1000],['ml','l',1000],['mm','cm',10]];
+  function genMeasurement(year){ var c=pick(CONV.slice(0, year<=4?2:CONV.length)); var factor=c[2]; var mult=randInt(1, year<=4?9:30); var value=mult*factor;
+    var mc=makeMC(String(mult), function(){ return String(mult+pick([-2,-1,1,2,3])); });
+    return { q:'Convert '+value+' '+c[0]+' to '+c[1]+'.', options:mc.options, correct:mc.correct }; }
+  function genTime(year){ var h=randInt(1,12); var m=pick(year>6?[0,5,10,15,20,25,30,35,40,45,50,55]:[0,15,30,45]);
+    var addMin = year<=4?pick([15,30,60]):randInt(5,120);
+    var totalMin=h*60+m+addMin; var nh=Math.floor(totalMin/60)%12; if(nh===0) nh=12; var nm=totalMin%60;
+    var startStr = h+':'+(m<10?'0'+m:m); var correctStr= nh+':'+(nm<10?'0'+nm:nm);
+    var mc=makeMC(correctStr, function(){ var oh=nh, om=nm+pick([-15,-10,5,10,15,20]); if(om<0){om+=60;oh-=1;} if(om>=60){om-=60;oh+=1;} if(oh<=0)oh+=12; if(oh>12)oh-=12; return oh+':'+(om<10?'0'+om:om); });
+    return { q:'It is '+startStr+'. What time will it be in '+addMin+' minutes?', options:mc.options, correct:mc.correct }; }
+  function genMoney(year){ var maxPTable=[300,500,800,1200,1500,2000,2500,3000,4000,5000]; var maxP=maxPTable[year-1];
+    var price=+(randInt(50,maxP)/100).toFixed(2); var note=pick([5,10,20,50,100]);
+    if(note<=price){ note=Math.ceil(price)+pick([1,2,5]); }
+    var correct=+(note-price).toFixed(2); var fmt=function(v){ return '\u00a3'+Number(v).toFixed(2); };
+    var mc=makeMC(fmt(correct), function(){ var d=+(correct+pick([-2,-1,-0.5,0.5,1,2])).toFixed(2); if(d<0) d=Math.abs(d)+0.5; return fmt(d); });
+    return { q:'An item costs '+fmt(price)+'. You pay with a '+fmt(note)+' note. How much change do you get?', options:mc.options, correct:mc.correct }; }
+  function genData(year){ var n = year<=4?4:(year<=7?5:6); var maxV = year<=4?10:(year<=7?30:100);
+    var arr=[]; for(var i=0;i<n;i++){ arr.push(randInt(1,maxV)); }
+    var mode = pick(['range','mode','mean']); var correct;
+    if(mode==='range'){ correct = Math.max.apply(null,arr)-Math.min.apply(null,arr); }
+    else if(mode==='mode'){ arr[n-1]=arr[0];
+      var counts={}; arr.forEach(function(v){ counts[v]=(counts[v]||0)+1; });
+      var best=arr[0], bestCount=0; Object.keys(counts).forEach(function(k){ if(counts[k]>bestCount){bestCount=counts[k]; best=+k;} });
+      correct=best;
+    } else { var sum=arr.reduce(function(a,b){return a+b;},0); correct=Math.round(sum/n); }
+    var label = mode==='range'?'range':(mode==='mode'?'mode':'mean (average)');
+    var mc=makeMC(String(correct), function(){ return String(correct+pick([-3,-2,-1,1,2,3])); });
+    return { q:'Here is a data set: '+arr.join(', ')+'. What is the '+label+'?', options:mc.options, correct:mc.correct }; }
+  function genProbability(year){ var red=randInt(1, year<=4?4:10); var blue=randInt(1, year<=4?4:10); var total=red+blue;
+    var g=gcd(red,total); var correct=(red/g)+'/'+(total/g);
+    var mc=makeMC(correct, function(){ var n=randInt(1,total), d=total; var gg=gcd(n,d); return (n/gg)+'/'+(d/gg); });
+    return { q:'A bag has '+red+' red balls and '+blue+' blue balls. What is the probability of picking a red ball, as a simplified fraction?', options:mc.options, correct:mc.correct }; }
+  function genCoordinates(year){ var max = year<=4?10:(year<=7?15:20); var allowNeg = year>6;
+    var x = allowNeg? randInt(-max,max) : randInt(0,max);
+    var y = allowNeg? randInt(-max,max) : randInt(0,max);
+    var correct = '('+x+', '+y+')';
+    var mc=makeMC(correct, function(){ var dx=x+pick([-3,-2,-1,1,2,3]); var dy=y+pick([-3,-2,-1,1,2,3]); return '('+dx+', '+dy+')'; });
+    var dir = (x>=0?x+' right':Math.abs(x)+' left') + ' and ' + (y>=0?y+' up':Math.abs(y)+' down');
+    return { q:'A point starts at the origin (0, 0) and moves '+dir+'. What are its new coordinates?', options:mc.options, correct:mc.correct }; }
+  function genMental(year){ var s=scaleFor(year); var type=pick(['double','half','addsub']);
+    if(type==='double'){ var n=randInt(1, Math.max(2,Math.floor(s.add/2))); var correct=n*2;
+      var mc=makeMC(String(correct), function(){ return String(correct+pick([-4,-2,2,4])); });
+      return { q:'What is double '+n+'?', options:mc.options, correct:mc.correct };
+    } else if(type==='half'){ var n2=randInt(1,Math.max(2,Math.floor(s.add/2)))*2; var correct2=n2/2;
+      var mc2=makeMC(String(correct2), function(){ return String(correct2+pick([-4,-2,2,4])); });
+      return { q:'What is half of '+n2+'?', options:mc2.options, correct:mc2.correct };
+    } else { var a=randInt(1,s.add), b=randInt(1,Math.min(a,s.add)); var op=pick(['+','-']); var correct3 = op==='+'? a+b : a-b;
+      var mc3=makeMC(String(correct3), function(){ return String(correct3+pick([-3,-2,-1,1,2,3])); });
+      return { q:'What is '+a+' '+op+' '+b+'?', options:mc3.options, correct:mc3.correct };
+    } }
+
+  var MATH_GEN = {
+    'Number Sense': genNumberSense, 'Addition': genAddition, 'Subtraction': genSubtraction, 'Multiplication': genMultiplication,
+    'Division': genDivision, 'Fractions': genFractions, 'Decimals': genDecimals, 'Percentages': genPercentages,
+    'Ratio & Proportion': genRatio, 'Algebra Basics': genAlgebra, 'Geometry & Shapes': genGeometry, 'Angles': genAngles,
+    'Symmetry': genSymmetry, 'Measurement': genMeasurement, 'Time & Clocks': genTime, 'Money Maths': genMoney,
+    'Data & Graphs': genData, 'Probability': genProbability, 'Coordinates': genCoordinates, 'Mental Maths': genMental
+  };
+
+  /* ================= FACT-BASED QUESTION ENGINE (knowledge subjects) ================= */
+  function capitalize(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+  var FWD_TEMPLATES = ['What is {term} known for?', 'Which of these best describes {term}?', 'Pick the true fact about {term}.', 'Which statement about {term} is correct?'];
+  var BWD_TEMPLATES = ['Which of these matches this clue: {fact}', 'This clue describes which term: {fact}', 'Which word or phrase fits this clue: {fact}', 'Read the clue and pick the matching term: {fact}'];
+  function shuffleArr(arr){ for(var i=arr.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=arr[i]; arr[i]=arr[j]; arr[j]=t; } return arr; }
+  function buildFactQuizSet(subject){
+    var facts = (FACTS[subject.cat.id] || {})[subject.name];
+    if(!facts || facts.length < 2) return null;
+    var pool = [];
+    facts.forEach(function(f, i){ pool.push({dir:'fwd', idx:i}); pool.push({dir:'bwd', idx:i}); });
+    shuffleArr(pool);
+    var out = pool.map(function(item){
+      var idx = item.idx; var term = facts[idx][0]; var fact = capitalize(facts[idx][1]);
+      var others = facts.filter(function(_,j){ return j!==idx; });
+      if(item.dir==='fwd'){
+        var qText = pick(FWD_TEMPLATES).replace('{term}', term);
+        var mc = makeMC(fact, function(){ return capitalize(pick(others)[1]); });
+        return { q:qText, options:mc.options, correct:mc.correct };
+      } else {
+        var qText2 = pick(BWD_TEMPLATES).replace('{fact}', fact);
+        var mc2 = makeMC(term, function(){ return pick(others)[0]; });
+        return { q:qText2, options:mc2.options, correct:mc2.correct };
+      }
+    });
+    return out.slice(0,8);
+  }
+
+  function buildQuizSet(subject, year){
+    if(subject.cat.id==='maths' && MATH_GEN[subject.name]){
+      var gen = MATH_GEN[subject.name]; var qs=[]; var guard=0; var seen={};
+      while(qs.length<8 && guard<80){
+        guard++; var q = gen(year);
+        if(!seen[q.q]){ seen[q.q]=true; qs.push(q); }
+      }
+      while(qs.length<8){ qs.push(gen(year)); }
+      return qs;
+    }
+    return buildFactQuizSet(subject);
+  }
 
   /* ================= PREFS (device-wide, not account-bound) ================= */
-  var PREFS_KEY = 'quizora_prefs_v1';
+  var PREFS_KEY = 'getsmartt_prefs_v1';
   var state = { year:5, category:'all', search:'', coins:0, ownedThemes:['default'], equippedTheme:'default' };
-  function loadPrefs(){
-    try{
-      var raw = localStorage.getItem(PREFS_KEY);
-      if(raw){ var p = JSON.parse(raw); if(p.year) state.year = p.year; if(p.category) state.category = p.category; }
-    }catch(e){ /* ignore */ }
-  }
-  function savePrefs(){
-    try{ localStorage.setItem(PREFS_KEY, JSON.stringify({ year:state.year, category:state.category })); }catch(e){ /* storage unavailable */ }
-  }
+  function loadPrefs(){ try{ var raw = localStorage.getItem(PREFS_KEY); if(raw){ var p = JSON.parse(raw); if(p.year) state.year = p.year; if(p.category) state.category = p.category; } }catch(e){} }
+  function savePrefs(){ try{ localStorage.setItem(PREFS_KEY, JSON.stringify({ year:state.year, category:state.category })); }catch(e){} }
   loadPrefs();
+  function applyTheme(){ document.documentElement.setAttribute('data-theme', state.equippedTheme); }
 
-  function applyTheme(){
-    document.documentElement.setAttribute('data-theme', state.equippedTheme);
-  }
-
-  /* ================= ACCOUNTS ================= */
-  var ACCOUNTS_KEY = 'quizora_accounts_v1';
-  var SESSION_KEY = 'quizora_session_v1';
-  var accounts = {};
-  var currentUser = null;
-
-  function loadAccounts(){
-    try{ accounts = JSON.parse(localStorage.getItem(ACCOUNTS_KEY)) || {}; }catch(e){ accounts = {}; }
-  }
-  function saveAccounts(){
-    try{ localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts)); }catch(e){ /* storage unavailable */ }
-  }
-  function loadSession(){
-    try{ return JSON.parse(localStorage.getItem(SESSION_KEY)); }catch(e){ return null; }
-  }
-  function saveSession(username){
-    try{ localStorage.setItem(SESSION_KEY, JSON.stringify({ username:username })); }catch(e){ /* storage unavailable */ }
-  }
-  function clearSession(){
-    try{ localStorage.removeItem(SESSION_KEY); }catch(e){ /* storage unavailable */ }
-  }
-  function hashPass(pw){
-    var h = 5381;
-    for(var i=0;i<pw.length;i++){ h = ((h*33) ^ pw.charCodeAt(i)) >>> 0; }
-    return h.toString(36);
-  }
-  function defaultAccountData(){
-    return { passHash:'', coins:0, ownedThemes:['default'], equippedTheme:'default', createdAt:Date.now() };
-  }
-  function applyAccountToState(username){
-    var acc = accounts[username];
-    state.coins = acc.coins || 0;
-    state.ownedThemes = (acc.ownedThemes || ['default']).slice();
-    state.equippedTheme = acc.equippedTheme || 'default';
-  }
-  function persistCurrentUser(){
-    if(!currentUser) return;
-    var acc = accounts[currentUser] || defaultAccountData();
-    acc.coins = state.coins;
-    acc.ownedThemes = state.ownedThemes;
-    acc.equippedTheme = state.equippedTheme;
-    accounts[currentUser] = acc;
-    saveAccounts();
-  }
-  function saveState(){
-    savePrefs();
-    persistCurrentUser();
-  }
-
+  /* ================= ACCOUNTS (local device only) ================= */
+  var ACCOUNTS_KEY = 'getsmartt_accounts_v1';
+  var SESSION_KEY = 'getsmartt_session_v1';
+  var accounts = {}; var currentUser = null;
+  function loadAccounts(){ try{ accounts = JSON.parse(localStorage.getItem(ACCOUNTS_KEY)) || {}; }catch(e){ accounts = {}; } }
+  function saveAccounts(){ try{ localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts)); }catch(e){} }
+  function loadSession(){ try{ return JSON.parse(localStorage.getItem(SESSION_KEY)); }catch(e){ return null; } }
+  function saveSession(u){ try{ localStorage.setItem(SESSION_KEY, JSON.stringify({ username:u })); }catch(e){} }
+  function clearSession(){ try{ localStorage.removeItem(SESSION_KEY); }catch(e){} }
+  function hashPass(pw){ var h=5381; for(var i=0;i<pw.length;i++){ h=((h*33)^pw.charCodeAt(i))>>>0; } return h.toString(36); }
+  function defaultAccountData(){ return { passHash:'', coins:0, ownedThemes:['default'], equippedTheme:'default', createdAt:Date.now() }; }
+  function applyAccountToState(u){ var acc=accounts[u]; state.coins=acc.coins||0; state.ownedThemes=(acc.ownedThemes||['default']).slice(); state.equippedTheme=acc.equippedTheme||'default'; }
+  function persistCurrentUser(){ if(!currentUser) return; var acc=accounts[currentUser]||defaultAccountData();
+    acc.coins=state.coins; acc.ownedThemes=state.ownedThemes; acc.equippedTheme=state.equippedTheme; accounts[currentUser]=acc; saveAccounts(); }
+  function saveState(){ savePrefs(); persistCurrentUser(); }
   function initials(name){ return name.trim().slice(0,2).toUpperCase() || '?'; }
 
   function loginSession(username){
-    currentUser = username;
-    applyAccountToState(username);
-    saveSession(username);
-    applyTheme();
-    $('accountName').textContent = username;
-    $('avatarDot').textContent = initials(username);
-    $('hud').classList.add('visible');
-    renderCoins(false);
-    renderYearRow();
-    renderCatRow();
-    renderSubjectGrid();
-    showScreen('home');
+    currentUser = username; applyAccountToState(username); saveSession(username); applyTheme();
+    $('accountName').textContent = username; $('avatarDot').textContent = initials(username);
+    $('hud').classList.add('visible'); renderCoins(false); renderYearRow(); renderCatRow(); renderSubjectGrid(); showScreen('home');
   }
-
   function doSignup(username, password){
     username = username.trim();
     if(!username || !password) return 'Enter a username and a password.';
     if(username.length < 2) return 'Username should be at least 2 characters.';
     if(accounts[username]) return 'That username is already taken.';
     if(password.length < 4) return 'Password should be at least 4 characters.';
-    var acc = defaultAccountData();
-    acc.passHash = hashPass(password);
-    accounts[username] = acc;
-    saveAccounts();
-    loginSession(username);
-    return null;
+    var acc = defaultAccountData(); acc.passHash = hashPass(password); accounts[username] = acc; saveAccounts();
+    loginSession(username); return null;
   }
   function doLogin(username, password){
-    username = username.trim();
-    var acc = accounts[username];
-    if(!acc) return 'No account with that username yet — try signing up.';
+    username = username.trim(); var acc = accounts[username];
+    if(!acc) return 'No account with that username yet - try signing up.';
     if(acc.passHash !== hashPass(password)) return 'Incorrect password.';
-    loginSession(username);
-    return null;
+    loginSession(username); return null;
   }
   function doLogout(){
-    persistCurrentUser();
-    currentUser = null;
-    clearSession();
-    state.coins = 0; state.ownedThemes = ['default']; state.equippedTheme = 'default';
-    applyTheme();
+    persistCurrentUser(); currentUser = null; clearSession();
+    state.coins = 0; state.ownedThemes = ['default']; state.equippedTheme = 'default'; applyTheme();
     $('hud').classList.remove('visible');
     $('authUsername').value = ''; $('authPassword').value = ''; $('authError').textContent = '';
     showScreen('auth');
@@ -698,98 +884,43 @@
   /* ================= DOM HELPERS ================= */
   var $ = function(id){ return document.getElementById(id); };
   var screens = ['auth','home','loading','error','quiz','results','shop'];
-  function showScreen(name){
-    screens.forEach(function(s){ $('screen-'+s).classList.toggle('active', s===name); });
-    window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
-  }
-
-  function renderCoins(bump){
-    $('coinCount').textContent = state.coins;
-    if(bump){
-      var pill = $('coinPill');
-      pill.classList.remove('bump'); void pill.offsetWidth; pill.classList.add('bump');
-    }
-  }
-
-  function yearAge(y){ return (y+4) + '–' + (y+5); }
-  function yearBand(y){
-    if(y<=2) return 'Little Learner';
-    if(y<=4) return 'Rising Star';
-    if(y<=6) return 'Explorer';
-    if(y<=8) return 'Achiever';
-    return 'Scholar';
-  }
+  function showScreen(name){ screens.forEach(function(s){ $('screen-'+s).classList.toggle('active', s===name); }); window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'}); }
+  function renderCoins(bump){ $('coinCount').textContent = state.coins; if(bump){ var pill=$('coinPill'); pill.classList.remove('bump'); void pill.offsetWidth; pill.classList.add('bump'); } }
+  function yearAge(y){ return (y+4) + '\u2013' + (y+5); }
+  function yearBand(y){ if(y<=2) return 'Little Learner'; if(y<=4) return 'Rising Star'; if(y<=6) return 'Explorer'; if(y<=8) return 'Achiever'; return 'Scholar'; }
 
   /* ================= AUTH FORM ================= */
   var authMode = 'login';
-  function setAuthMode(mode){
-    authMode = mode;
-    $('tabLogin').classList.toggle('active', mode==='login');
-    $('tabSignup').classList.toggle('active', mode==='signup');
+  function setAuthMode(mode){ authMode = mode;
+    $('tabLogin').classList.toggle('active', mode==='login'); $('tabSignup').classList.toggle('active', mode==='signup');
     $('authSubmit').textContent = mode==='login' ? 'Log in' : 'Create account';
     $('authPassword').setAttribute('autocomplete', mode==='login' ? 'current-password' : 'new-password');
-    $('authError').textContent = '';
-  }
+    $('authError').textContent = ''; }
   $('tabLogin').addEventListener('click', function(){ setAuthMode('login'); });
   $('tabSignup').addEventListener('click', function(){ setAuthMode('signup'); });
-  $('authForm').addEventListener('submit', function(e){
-    e.preventDefault();
+  $('authForm').addEventListener('submit', function(e){ e.preventDefault();
     var u = $('authUsername').value, p = $('authPassword').value;
     var err = authMode==='login' ? doLogin(u,p) : doSignup(u,p);
-    if(err){ $('authError').textContent = err; }
-  });
+    if(err){ $('authError').textContent = err; } });
 
   /* ================= HOME RENDERING ================= */
-  function renderYearRow(){
-    var row = $('yearRow'); row.innerHTML = '';
-    for(var y=1;y<=10;y++){
-      var chip = document.createElement('div');
-      chip.className = 'year-chip' + (state.year===y ? ' active' : '');
-      chip.textContent = 'Year ' + y;
-      chip.addEventListener('click', function(yy){ return function(){ state.year=yy; savePrefs(); renderYearRow(); }; }(y));
-      row.appendChild(chip);
-    }
-    $('ageHint').textContent = 'Year ' + state.year + ' · ' + yearBand(state.year) + ' · roughly age ' + yearAge(state.year);
-  }
-
-  function renderCatRow(){
-    var row = $('catRow'); row.innerHTML = '';
-    var all = document.createElement('div');
-    all.className = 'cat-chip' + (state.category==='all' ? ' active':'');
-    all.innerHTML = '<span class="cat-dot" style="background:var(--accent-a)"></span>All subjects';
-    all.addEventListener('click', function(){ state.category='all'; savePrefs(); renderCatRow(); renderSubjectGrid(); });
-    row.appendChild(all);
-    CATEGORIES.forEach(function(cat){
-      var chip = document.createElement('div');
-      chip.className = 'cat-chip' + (state.category===cat.id ? ' active':'');
-      chip.style.setProperty('--cat-color', cat.color);
-      chip.innerHTML = '<span class="cat-dot"></span>' + cat.icon + ' ' + cat.name;
-      chip.addEventListener('click', function(id){ return function(){ state.category=id; savePrefs(); renderCatRow(); renderSubjectGrid(); }; }(cat.id));
-      row.appendChild(chip);
-    });
-  }
-
-  function renderSubjectGrid(){
-    var grid = $('subjectGrid'); grid.innerHTML = '';
-    var q = state.search.trim().toLowerCase();
-    var list = ALL_SUBJECTS.filter(function(s){
-      var catOk = state.category==='all' || s.cat.id===state.category;
-      var searchOk = !q || s.name.toLowerCase().indexOf(q) !== -1 || s.cat.name.toLowerCase().indexOf(q) !== -1;
-      return catOk && searchOk;
-    });
-    if(list.length===0){
-      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><h3>No subjects found</h3><p>Try a different search or category.</p></div>';
-      return;
-    }
-    list.forEach(function(s){
-      var tile = document.createElement('button');
-      tile.className = 'subject-tile';
-      tile.style.setProperty('--cat-color', s.cat.color);
-      tile.innerHTML = '<div class="subject-icon">'+s.cat.icon+'</div><div><div class="subject-name">'+s.name+'</div><div class="subject-cat">'+s.cat.name+'</div></div>';
-      tile.addEventListener('click', function(){ startQuiz(s); });
-      grid.appendChild(tile);
-    });
-  }
+  function renderYearRow(){ var row=$('yearRow'); row.innerHTML='';
+    for(var y=1;y<=10;y++){ var chip=document.createElement('div'); chip.className='year-chip'+(state.year===y?' active':''); chip.textContent='Year '+y;
+      chip.addEventListener('click', function(yy){ return function(){ state.year=yy; savePrefs(); renderYearRow(); }; }(y)); row.appendChild(chip); }
+    $('ageHint').textContent = 'Year ' + state.year + ' \u00b7 ' + yearBand(state.year) + ' \u00b7 roughly age ' + yearAge(state.year); }
+  function renderCatRow(){ var row=$('catRow'); row.innerHTML='';
+    var all=document.createElement('div'); all.className='cat-chip'+(state.category==='all'?' active':''); all.innerHTML='<span class="cat-dot" style="background:var(--accent-a)"></span>All subjects';
+    all.addEventListener('click', function(){ state.category='all'; savePrefs(); renderCatRow(); renderSubjectGrid(); }); row.appendChild(all);
+    CATEGORIES.forEach(function(cat){ var chip=document.createElement('div'); chip.className='cat-chip'+(state.category===cat.id?' active':'');
+      chip.style.setProperty('--cat-color', cat.color); chip.innerHTML='<span class="cat-dot"></span>'+cat.icon+' '+cat.name;
+      chip.addEventListener('click', function(id){ return function(){ state.category=id; savePrefs(); renderCatRow(); renderSubjectGrid(); }; }(cat.id)); row.appendChild(chip); }); }
+  function renderSubjectGrid(){ var grid=$('subjectGrid'); grid.innerHTML=''; var q=state.search.trim().toLowerCase();
+    var list = ALL_SUBJECTS.filter(function(s){ var catOk = state.category==='all' || s.cat.id===state.category;
+      var searchOk = !q || s.name.toLowerCase().indexOf(q)!==-1 || s.cat.name.toLowerCase().indexOf(q)!==-1; return catOk && searchOk; });
+    if(list.length===0){ grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><h3>No subjects found</h3><p>Try a different search or category.</p></div>'; return; }
+    list.forEach(function(s){ var tile=document.createElement('button'); tile.className='subject-tile'; tile.style.setProperty('--cat-color', s.cat.color);
+      tile.innerHTML='<div class="subject-icon">'+s.cat.icon+'</div><div><div class="subject-name">'+s.name+'</div><div class="subject-cat">'+s.cat.name+'</div></div>';
+      tile.addEventListener('click', function(){ startQuiz(s); }); grid.appendChild(tile); }); }
 
   $('searchInput').addEventListener('input', function(e){ state.search = e.target.value; renderSubjectGrid(); });
   $('logoBtn').addEventListener('click', function(){ if(currentUser) showScreen('home'); });
@@ -799,269 +930,103 @@
   $('logoutBtn').addEventListener('click', doLogout);
 
   /* ================= SHOP ================= */
-  function openShop(){
-    renderShop();
-    showScreen('shop');
-  }
-  function renderShop(){
-    var grid = $('themeGrid'); grid.innerHTML = '';
-    THEMES.forEach(function(t){
-      var owned = state.ownedThemes.indexOf(t.id) !== -1;
-      var equipped = state.equippedTheme === t.id;
-      var card = document.createElement('div');
-      card.className = 'theme-card';
-      var btnHtml;
-      if(equipped){ btnHtml = '<button class="btn theme-btn equipped" disabled>Equipped</button>'; }
-      else if(owned){ btnHtml = '<button class="btn theme-btn equip-btn">Equip</button>'; }
-      else { btnHtml = '<button class="btn primary theme-btn buy-btn">Unlock</button>'; }
-      card.innerHTML =
-        '<div class="theme-swatch" style="background:'+t.css+'"></div>' +
-        '<div class="theme-name">'+t.name+'</div>' +
-        '<div class="theme-desc">'+t.desc+'</div>' +
-        (owned ? '' : '<div class="theme-price"><svg width="15" height="15" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD166" stroke="#B9781E" stroke-width="1"/></svg>'+t.price+'</div>') +
-        btnHtml;
-      var buyBtn = card.querySelector('.buy-btn');
-      if(buyBtn){ buyBtn.addEventListener('click', function(id, price){ return function(){ buyTheme(id, price); }; }(t.id, t.price)); }
-      var equipBtn = card.querySelector('.equip-btn');
-      if(equipBtn){ equipBtn.addEventListener('click', function(id){ return function(){ state.equippedTheme = id; applyTheme(); saveState(); renderShop(); }; }(t.id)); }
-      grid.appendChild(card);
-    });
-  }
-  function buyTheme(id, price){
-    if(state.coins < price) return;
-    state.coins -= price;
-    state.ownedThemes.push(id);
-    state.equippedTheme = id;
-    applyTheme();
-    saveState();
-    renderCoins(true);
-    renderShop();
-  }
+  function openShop(){ renderShop(); showScreen('shop'); }
+  function renderShop(){ var grid=$('themeGrid'); grid.innerHTML='';
+    THEMES.forEach(function(t){ var owned=state.ownedThemes.indexOf(t.id)!==-1; var equipped=state.equippedTheme===t.id;
+      var card=document.createElement('div'); card.className='theme-card'; var btnHtml;
+      if(equipped){ btnHtml='<button class="btn theme-btn equipped" disabled>Equipped</button>'; }
+      else if(owned){ btnHtml='<button class="btn theme-btn equip-btn">Equip</button>'; }
+      else { btnHtml='<button class="btn primary theme-btn buy-btn">Unlock</button>'; }
+      card.innerHTML = '<div class="theme-swatch" style="background:'+t.css+'"></div>' + '<div class="theme-name">'+t.name+'</div>' + '<div class="theme-desc">'+t.desc+'</div>' +
+        (owned?'':'<div class="theme-price"><svg width="15" height="15" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD166" stroke="#B9781E" stroke-width="1"/></svg>'+t.price+'</div>') + btnHtml;
+      var buyBtn=card.querySelector('.buy-btn'); if(buyBtn){ buyBtn.addEventListener('click', function(id,price){ return function(){ buyTheme(id,price); }; }(t.id,t.price)); }
+      var equipBtn=card.querySelector('.equip-btn'); if(equipBtn){ equipBtn.addEventListener('click', function(id){ return function(){ state.equippedTheme=id; applyTheme(); saveState(); renderShop(); }; }(t.id)); }
+      grid.appendChild(card); }); }
+  function buyTheme(id, price){ if(state.coins < price) return; state.coins -= price; state.ownedThemes.push(id); state.equippedTheme = id; applyTheme(); saveState(); renderCoins(true); renderShop(); }
 
-  /* ================= QUIZ ENGINE ================= */
+  /* ================= QUIZ FLOW ================= */
   var quiz = { subject:null, questions:[], index:0, score:0, coinsEarned:0, streak:0, timer:null, timerStart:0, timerDuration:15000, locked:false };
 
-  function ageForYear(y){ return y+4; }
-
-  function buildPrompt(subject, year){
-    var age = ageForYear(year);
-    return [
-      'You write multiple-choice quiz questions for a school quiz app.',
-      'Subject: "'+subject.name+'" (category: '+subject.cat.name+').',
-      'Audience: UK school Year '+year+' students, approximately age '+age+' to '+(age+1)+'.',
-      '',
-      'Write exactly 8 multiple-choice questions about "'+subject.name+'" at a difficulty that is genuinely appropriate for that age — not too easy, not too hard.',
-      'Rules:',
-      '- Each question has exactly 4 answer options with exactly one correct answer.',
-      '- Keep questions short and clear. Keep each answer option short, ideally under 6 words.',
-      '- Cover a good variety of topics within the subject; do not ask near-duplicate questions.',
-      '- Keep all content factually accurate, appropriate for children, and free of violence, mature or scary themes.',
-      '- Shuffle which option index is correct across questions — do not always put the answer in the same position.',
-      '',
-      'Respond with ONLY valid JSON and nothing else — no markdown code fences, no commentary, no leading or trailing text.',
-      'Return exactly this shape:',
-      '[{"q":"question text","options":["a","b","c","d"],"correct":0}, ... 8 items total]',
-      '"correct" is the zero-based index (0-3) of the right answer inside "options".'
-    ].join('\n');
-  }
-
-  var sampleFn = null;
-  var sampleChecked = false;
-  function ensureSample(){
-    if(sampleChecked) return Promise.resolve(sampleFn);
-    sampleChecked = true;
-    if(!window.claude || !window.claude.use){ return Promise.resolve(null); }
-    return window.claude.use('sample').then(function(s){ sampleFn = s; return s; }).catch(function(){ return null; });
-  }
-
-  function startQuiz(subject){
-    quiz.subject = subject;
-    generateQuestions();
-  }
+  function startQuiz(subject){ quiz.subject = subject; generateQuestions(); }
 
   function generateQuestions(){
-    $('loadingTitle').textContent = 'Writing your ' + quiz.subject.name + ' quiz…';
-    $('loadingSub').textContent = 'AI is building 8 Year ' + state.year + ' questions just for you.';
+    $('loadingTitle').textContent = 'Writing your ' + quiz.subject.name + ' quiz\u2026';
+    $('loadingSub').textContent = "GetSmartt's built-in engine is building 8 Year " + state.year + ' questions.';
     showScreen('loading');
-
-    ensureSample().then(function(sample){
-      if(!sample){
-        showError('AI question writer unavailable', "This copy of Quizora can't reach an AI question writer — that feature only works when this page is opened inside Claude, where it's allowed to ask the AI for questions.");
-        return;
+    setTimeout(function(){
+      try{
+        var qs = buildQuizSet(quiz.subject, state.year);
+        if(!qs || qs.length < 4) throw new Error('empty');
+        quiz.questions = qs; quiz.index=0; quiz.score=0; quiz.coinsEarned=0; quiz.streak=0;
+        showScreen('quiz'); renderQuizChrome(); renderQuestion();
+      }catch(e){
+        showError('Could not build that quiz', 'Something went wrong generating questions. Please try again.');
       }
-      var prompt = buildPrompt(quiz.subject, state.year);
-      sample.json(prompt, { modelTier:'default', cache:false }).then(function(data){
-        var qs = normalizeQuestions(data);
-        if(!qs || qs.length < 4){ throw new Error('bad_shape'); }
-        quiz.questions = qs;
-        quiz.index = 0; quiz.score = 0; quiz.coinsEarned = 0; quiz.streak = 0;
-        showScreen('quiz');
-        renderQuizChrome();
-        renderQuestion();
-      }).catch(function(err){
-        var code = err && err.code;
-        if(code === 'not_granted'){
-          showError('Permission needed', 'Quizora needs permission to ask Claude for quiz questions. Please allow access and try again.');
-        } else if(code === 'rate_limited'){
-          showError('One moment', "We're generating a lot of quizzes right now. Please wait a moment and try again.");
-        } else {
-          showError('Couldn\'t generate that quiz', 'Something went wrong while writing your questions. Let\'s try again.');
-        }
-      });
-    });
+    }, 650);
   }
 
-  function normalizeQuestions(data){
-    var arr = Array.isArray(data) ? data : (data && Array.isArray(data.questions) ? data.questions : null);
-    if(!arr) return null;
-    var out = [];
-    arr.forEach(function(item){
-      if(!item || typeof item.q !== 'string' || !Array.isArray(item.options) || item.options.length < 4) return;
-      var correct = parseInt(item.correct, 10);
-      if(isNaN(correct) || correct < 0 || correct > 3) correct = 0;
-      out.push({ q:item.q, options:item.options.slice(0,4), correct:correct });
-    });
-    return out.slice(0,8);
-  }
-
-  function showError(title, sub){
-    $('errorTitle').textContent = title;
-    $('errorSub').textContent = sub;
-    showScreen('error');
-  }
+  function showError(title, sub){ $('errorTitle').textContent = title; $('errorSub').textContent = sub; showScreen('error'); }
   $('errorRetryBtn').addEventListener('click', function(){ if(quiz.subject) generateQuestions(); else showScreen('home'); });
   $('errorHomeBtn').addEventListener('click', function(){ showScreen('home'); });
 
-  function renderQuizChrome(){
-    $('quizIcon').textContent = quiz.subject.cat.icon;
-    $('quizSubjectName').textContent = quiz.subject.name;
-    $('quizYearTag').textContent = 'Year ' + state.year + ' · ' + yearBand(state.year);
-    $('liveScore').textContent = '0';
-    $('streakDisplay').textContent = '';
-  }
+  function renderQuizChrome(){ $('quizIcon').textContent = quiz.subject.cat.icon; $('quizSubjectName').textContent = quiz.subject.name;
+    $('quizYearTag').textContent = 'Year ' + state.year + ' \u00b7 ' + yearBand(state.year); $('liveScore').textContent = '0'; $('streakDisplay').textContent = ''; }
 
-  $('quitBtn').addEventListener('click', function(){
-    stopTimer();
-    showScreen('home');
-  });
+  $('quitBtn').addEventListener('click', function(){ stopTimer(); showScreen('home'); });
 
   function renderQuestion(){
-    quiz.locked = false;
-    var total = quiz.questions.length;
-    var q = quiz.questions[quiz.index];
-    $('progressFill').style.width = ((quiz.index)/total*100) + '%';
-    $('progressCount').textContent = (quiz.index+1) + ' / ' + total;
+    quiz.locked = false; var total = quiz.questions.length; var q = quiz.questions[quiz.index];
+    $('progressFill').style.width = ((quiz.index)/total*100) + '%'; $('progressCount').textContent = (quiz.index+1) + ' / ' + total;
     $('questionText').textContent = q.q;
-
-    var grid = $('answersGrid'); grid.innerHTML = '';
-    var letters = ['A','B','C','D'];
-    q.options.forEach(function(opt, i){
-      var btn = document.createElement('button');
-      btn.className = 'answer-btn opt-'+i;
+    var grid = $('answersGrid'); grid.innerHTML = ''; var letters = ['A','B','C','D'];
+    q.options.forEach(function(opt, i){ var btn = document.createElement('button'); btn.className = 'answer-btn opt-'+i;
       btn.innerHTML = '<span class="answer-letter">'+letters[i]+'</span><span>'+opt+'</span>';
-      btn.addEventListener('click', function(){ selectAnswer(i); });
-      grid.appendChild(btn);
-    });
-
-    quiz.timerDuration = state.year <= 5 ? 20000 : 15000;
-    startTimer();
+      btn.addEventListener('click', function(){ selectAnswer(i); }); grid.appendChild(btn); });
+    quiz.timerDuration = state.year <= 5 ? 20000 : 15000; startTimer();
   }
 
-  function startTimer(){
-    stopTimer();
-    var fill = $('timerFill');
-    fill.classList.remove('warn');
-    fill.style.transition = 'none';
-    fill.style.width = '100%';
-    void fill.offsetWidth;
+  function startTimer(){ stopTimer(); var fill = $('timerFill'); fill.classList.remove('warn');
+    fill.style.transition = 'none'; fill.style.width = '100%'; void fill.offsetWidth;
     fill.style.transition = 'width ' + (quiz.timerDuration/1000) + 's linear';
     requestAnimationFrame(function(){ fill.style.width = '0%'; });
     quiz.timerStart = Date.now();
     quiz.timer = setTimeout(function(){ selectAnswer(-1); }, quiz.timerDuration);
-    setTimeout(function(){ if(!quiz.locked) fill.classList.add('warn'); }, quiz.timerDuration*0.6);
-  }
-  function stopTimer(){
-    if(quiz.timer){ clearTimeout(quiz.timer); quiz.timer = null; }
-  }
+    setTimeout(function(){ if(!quiz.locked) fill.classList.add('warn'); }, quiz.timerDuration*0.6); }
+  function stopTimer(){ if(quiz.timer){ clearTimeout(quiz.timer); quiz.timer = null; } }
 
   function selectAnswer(i){
-    if(quiz.locked) return;
-    quiz.locked = true;
-    stopTimer();
-    var elapsed = Date.now() - quiz.timerStart;
-    var timeLeftFrac = Math.max(0, 1 - elapsed/quiz.timerDuration);
-    var q = quiz.questions[quiz.index];
-    var buttons = $('answersGrid').querySelectorAll('.answer-btn');
-    var correct = i === q.correct;
-
-    buttons.forEach(function(btn, idx){
-      btn.disabled = true;
-      if(idx === q.correct) btn.classList.add('correct');
-      else if(idx === i) btn.classList.add('wrong');
-      else btn.classList.add('dim');
-    });
-
+    if(quiz.locked) return; quiz.locked = true; stopTimer();
+    var elapsed = Date.now() - quiz.timerStart; var timeLeftFrac = Math.max(0, 1 - elapsed/quiz.timerDuration);
+    var q = quiz.questions[quiz.index]; var buttons = $('answersGrid').querySelectorAll('.answer-btn'); var correct = i === q.correct;
+    buttons.forEach(function(btn, idx){ btn.disabled = true;
+      if(idx === q.correct) btn.classList.add('correct'); else if(idx === i) btn.classList.add('wrong'); else btn.classList.add('dim'); });
     var coinsGained = 0;
-    if(correct){
-      quiz.score++;
-      quiz.streak++;
-      coinsGained = 10 + Math.round(timeLeftFrac*10);
+    if(correct){ quiz.score++; quiz.streak++; coinsGained = 10 + Math.round(timeLeftFrac*10);
       if(quiz.streak>0 && quiz.streak%3===0) coinsGained += 5;
-      $('streakDisplay').textContent = quiz.streak>=2 ? ('🔥 ' + quiz.streak + ' streak') : '';
-    } else {
-      quiz.streak = 0;
-      $('streakDisplay').textContent = '';
-    }
-    quiz.coinsEarned += coinsGained;
-    $('liveScore').textContent = quiz.score;
-
-    if(coinsGained > 0){
-      spawnFloatCoin(buttons[i>=0?i:q.correct] || buttons[q.correct], coinsGained);
-    }
-
-    setTimeout(function(){
-      quiz.index++;
-      if(quiz.index >= quiz.questions.length){
-        finishQuiz();
-      } else {
-        renderQuestion();
-      }
-    }, 1250);
+      $('streakDisplay').textContent = quiz.streak>=2 ? ('\ud83d\udd25 ' + quiz.streak + ' streak') : '';
+    } else { quiz.streak = 0; $('streakDisplay').textContent = ''; }
+    quiz.coinsEarned += coinsGained; $('liveScore').textContent = quiz.score;
+    if(coinsGained > 0){ spawnFloatCoin(buttons[i>=0?i:q.correct] || buttons[q.correct], coinsGained); }
+    setTimeout(function(){ quiz.index++; if(quiz.index >= quiz.questions.length){ finishQuiz(); } else { renderQuestion(); } }, 1250);
   }
 
-  function spawnFloatCoin(el, amount){
-    if(!el) return;
-    var rect = el.getBoundingClientRect();
-    var f = document.createElement('div');
-    f.className = 'float-coin';
-    f.textContent = '+' + amount;
-    f.style.left = (rect.left + rect.width/2 - 16) + 'px';
-    f.style.top = (rect.top) + 'px';
-    document.body.appendChild(f);
-    setTimeout(function(){ f.remove(); }, 1000);
-  }
+  function spawnFloatCoin(el, amount){ if(!el) return; var rect = el.getBoundingClientRect();
+    var f = document.createElement('div'); f.className = 'float-coin'; f.textContent = '+' + amount;
+    f.style.left = (rect.left + rect.width/2 - 16) + 'px'; f.style.top = (rect.top) + 'px';
+    document.body.appendChild(f); setTimeout(function(){ f.remove(); }, 1000); }
 
   function finishQuiz(){
-    $('progressFill').style.width = '100%';
-    state.coins += quiz.coinsEarned;
-    saveState();
-    var total = quiz.questions.length;
-    var pct = Math.round(quiz.score/total*100);
-    $('scoreRing').style.setProperty('--pct', pct);
-    $('scorePct').textContent = pct + '%';
-    $('scoreFrac').textContent = quiz.score + '/' + total;
+    $('progressFill').style.width = '100%'; state.coins += quiz.coinsEarned; saveState();
+    var total = quiz.questions.length; var pct = Math.round(quiz.score/total*100);
+    $('scoreRing').style.setProperty('--pct', pct); $('scorePct').textContent = pct + '%'; $('scoreFrac').textContent = quiz.score + '/' + total;
     $('resultsCoins').textContent = '+' + quiz.coinsEarned + ' coins';
-
     var title, sub;
     if(pct === 100){ title = 'Perfect score!'; sub = 'Every question, nailed it. ' + quiz.subject.name + ' champion.'; }
     else if(pct >= 75){ title = 'Great job!'; sub = "You really know your " + quiz.subject.name + "."; }
     else if(pct >= 50){ title = 'Nice work!'; sub = "You're getting the hang of " + quiz.subject.name + "."; }
-    else { title = 'Quiz complete'; sub = "Practice makes perfect — try " + quiz.subject.name + " again?"; }
-    $('resultsTitle').textContent = title;
-    $('resultsSub').textContent = sub;
-
-    renderCoins(true);
-    showScreen('results');
+    else { title = 'Quiz complete'; sub = "Practice makes perfect - try " + quiz.subject.name + " again?"; }
+    $('resultsTitle').textContent = title; $('resultsSub').textContent = sub;
+    renderCoins(true); showScreen('results');
   }
 
   $('playAgainBtn').addEventListener('click', function(){ generateQuestions(); });
@@ -1069,13 +1034,9 @@
 
   /* ================= INIT ================= */
   loadAccounts();
-  ensureSample();
   var session = loadSession();
-  if(session && session.username && accounts[session.username]){
-    loginSession(session.username);
-  } else {
-    showScreen('auth');
-  }
+  if(session && session.username && accounts[session.username]){ loginSession(session.username); }
+  else { showScreen('auth'); }
 
 })();
 </script>
